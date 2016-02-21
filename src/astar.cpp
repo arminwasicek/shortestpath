@@ -15,24 +15,27 @@ using namespace std;
 
 
 
+void run_dfs()  {
+	Grid grid(10,5);
+	ShortestPath dfs(&grid);
+	dfs.depthfirst(XYPoint(2,3), XYPoint(3,9));
+}
+
+void run_bfs()  {
+	Grid grid(10,5);
+	ShortestPath bfs(&grid);
+	bfs.depthfirst(XYPoint(2,3), XYPoint(3,9));
+}
 
 
 
 int main() {
 
-	Grid grid(10,5);
-
 	cout << "Hello World" << endl;
 	cout << "\033[1;31mbold red text\033[0m\n";
 
-	ShortestPath bfs(&grid);
-	//bfs.depthfirst(XYPoint(2,3), XYPoint(3,9));
-	bfs.breadthfirst(XYPoint(2,3), XYPoint(3,9));
+	run_dfs();
 
-	XYPoint p(3,3);
-	p.neighbours(grid);
-
-	grid.plot();
 
 	return 0;
 }
