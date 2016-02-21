@@ -8,6 +8,7 @@
 #ifndef SHORTESTPATH_HPP_
 #define SHORTESTPATH_HPP_
 
+#include "points.hpp"
 
 using namespace std;
 
