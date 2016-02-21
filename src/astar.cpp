@@ -9,26 +9,10 @@
 #include <iostream>
 #include <vector>
 #include "points.hpp"
+#include "shortestpath.hpp"
 
 using namespace std;
 
-
-
-class ShortestPath {
-	vector<XYPoint> frontier;
-	vector<XYPoint> visited;
-	void visit(XYPoint p);
-	bool isvisited(XYPoint p);
-	bool infrontier(XYPoint p);
-	void printvector(vector<XYPoint> v);
-	Grid *grid = nullptr;
-public:
-	ShortestPath(Grid *g) { grid=g; }
-	void depthfirst(XYPoint start, XYPoint goal);
-	void breadthfirst(XYPoint start, XYPoint goal);
-	void printfrontier() { printvector(frontier); };
-	void printvisited() { printvector(visited); };
-};
 
 bool ShortestPath::isvisited(XYPoint p) {
 	if (find(visited.begin(), visited.end(), p) != visited.end() ) {
