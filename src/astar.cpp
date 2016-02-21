@@ -25,6 +25,7 @@ class ShortestPath {
 public:
 	ShortestPath(Grid *g) { grid=g; }
 	void depthfirst(XYPoint start, XYPoint goal);
+	void breadthfirst(XYPoint start, XYPoint goal);
 	void printfrontier() { printvector(frontier); };
 	void printvisited() { printvector(visited); };
 };
@@ -88,6 +89,35 @@ void ShortestPath::depthfirst(XYPoint start, XYPoint goal) {
 	cout << "Points visited " << c << endl;
 }
 
+void ShortestPath::breadthfirst(XYPoint start, XYPoint goal) {
+	vector<XYPoint>::iterator it;
+	frontier.push_back(start);
+	int c=0;
+
+	while(frontier.size()>0) {
+		XYPoint p = frontier.front();
+		frontier.erase(frontier.begin());
+
+		visit(p);
+		vector<XYPoint> n = p.neighbours(*grid);
+
+		for(it=n.begin(); it!=n.end(); ++it) {
+			XYPoint pp = *it;
+			if(!isvisited(pp) && !infrontier(pp)) {
+				frontier.push_back(pp);
+				cout << pp << endl;
+				c++;
+				grid->setWeight(pp, c);
+			}
+		}
+		grid->plot();
+		cout << endl;
+		cout << frontier.size() << " -> " << grid->getWeight(p) << " " << p << endl;
+		printfrontier();
+		printvisited();
+	}
+	cout << "Points visited " << c << endl;
+}
 
 
 
@@ -98,22 +128,9 @@ int main() {
 	cout << "Hello World" << endl;
 	cout << "\033[1;31mbold red text\033[0m\n";
 
-//	grid.setWeight(20,10,8);
-//	grid.setWeight(20,11,8);
-//	grid.setWeight(20,12,8);
-//	grid.setWeight(20,13,8);
-//	grid.setWeight(20,14,8);
-//	grid.setWeight(20,15,8);
-//	grid.setWeight(21,10,8);
-//	grid.setWeight(21,11,8);
-//	grid.setWeight(21,12,8);
-//	grid.setWeight(21,13,8);
-//	grid.setWeight(21,14,8);
-//	grid.setWeight(21,15,8);
-
-
 	ShortestPath bfs(&grid);
-	bfs.depthfirst(XYPoint(2,3), XYPoint(3,9));
+	//bfs.depthfirst(XYPoint(2,3), XYPoint(3,9));
+	bfs.breadthfirst(XYPoint(2,3), XYPoint(3,9));
 
 	XYPoint p(3,3);
 	p.neighbours(grid);
