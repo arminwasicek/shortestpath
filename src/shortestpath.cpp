@@ -123,6 +123,46 @@ void ShortestPath::breadthfirst(XYPoint start, XYPoint goal) {
 }
 
 
+
+void ShortestPath::bfspath(XYPoint start, XYPoint goal) {
+	vector<XYPoint>::iterator it;
+	frontier.push_back(start);
+	visitmap(start,start);
+
+	int c=0;
+	int vc=0;
+
+	while(frontier.size()>0) {
+		XYPoint from = frontier.front();
+		frontier.erase(frontier.begin());
+
+		visit(from);
+		vector<XYPoint> n = from.neighbours(*grid);
+
+		for(it=n.begin(); it!=n.end(); ++it) {
+			XYPoint curr = *it; ++vc;
+			if(!isvisitedmap(curr)) {
+				frontier.push_back(curr);
+				visitmap(curr,from);
+				cout << curr << endl;
+				c++;
+				grid->setWeight(curr, c);
+			}
+		}
+		grid->plot();
+		cout << endl;
+		cout << frontier.size() << " -> " << grid->getWeight(from) << " " << from << endl;
+		printfrontier();
+		printvisited();
+	}
+	cout << "Points visited " << c << endl;
+	cout << "Points checked " << vc << endl;
+	cout << "Map size " << camefrom.size() << endl;
+}
+
+
+
+/*
 void ShortestPath::bfspath(XYPoint start, XYPoint goal) {
 	vector<XYPoint>::iterator it;
 
@@ -136,8 +176,6 @@ void ShortestPath::bfspath(XYPoint start, XYPoint goal) {
 		XYPoint from = frontier.front();
 		frontier.erase(frontier.begin());
 
-		cout << endl;
-		cout << frontier.size() << " -> " << grid->getWeight(from) << " " << from << endl;
 
 		if(from==goal) {
 		}
@@ -156,6 +194,9 @@ void ShortestPath::bfspath(XYPoint start, XYPoint goal) {
 			}
 		}
 		grid->plot();
+		cout << endl;
+		cout << frontier.size() << " -> " << grid->getWeight(from) << " " << from << endl;
+
 		cout << "frontier = "; printfrontier();
 		cout << "visited  = "; printmap(camefrom);
 	}
@@ -163,3 +204,4 @@ void ShortestPath::bfspath(XYPoint start, XYPoint goal) {
 	cout << "Points checked " << vc << endl;
 	cout << "Map size " << camefrom.size() << endl;
 }
+*/
