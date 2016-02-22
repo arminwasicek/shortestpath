@@ -7,6 +7,8 @@
 
 #include "shortestpath.hpp"
 
+using namespace std;
+
 bool ShortestPath::isvisited(XYPoint p) {
 	if (find(visited.begin(), visited.end(), p) != visited.end() ) {
 		return true;
@@ -97,3 +99,41 @@ void ShortestPath::breadthfirst(XYPoint start, XYPoint goal) {
 }
 
 
+void ShortestPath::bfspath(XYPoint start, XYPoint goal) {
+	vector<XYPoint>::iterator it;
+	//map<const XYPoint, XYPoint> camefrom;
+
+	frontier.push_back(start);
+	visit(start);
+	//camefrom[start] = start;
+
+	int c=0;
+
+	while(frontier.size()>0) {
+		XYPoint p = frontier.front();
+		frontier.erase(frontier.begin());
+
+		if(p==goal) {
+		}
+
+		vector<XYPoint> n = p.neighbours(*grid);
+
+		for(it=n.begin(); it!=n.end(); ++it) {
+			XYPoint pp = *it;
+			if(!isvisited(pp) && !infrontier(pp)) {
+				frontier.push_back(pp);
+				visit(pp);
+				//camefrom[pp] = p;
+				cout << pp << endl;
+				c++;
+				grid->setWeight(pp, c);
+			}
+		}
+		grid->plot();
+		cout << endl;
+		cout << frontier.size() << " -> " << grid->getWeight(p) << " " << p << endl;
+		printfrontier();
+		printvisited();
+	}
+	cout << "Points visited " << c << endl;
+}

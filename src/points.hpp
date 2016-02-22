@@ -25,6 +25,7 @@ public:
 	XYPoint(int x, int y);
 	bool equals(int x, int y) const;
 	bool equals(XYPoint p) const;
+	bool issmaller(XYPoint p) const;
 	int getX() const {return x;};
 	int getY() const {return y;};
 	vector<XYPoint> neighbours(Grid g);
@@ -55,7 +56,9 @@ public:
 	int getWidth()  { return width; }
 };
 
-
+inline bool operator<(const XYPoint& lhs, const XYPoint& rhs) {
+	return lhs.issmaller(rhs);
+}
 inline bool operator==(const XYPoint& lhs, const XYPoint& rhs) {
 	return lhs.equals(rhs);
 }

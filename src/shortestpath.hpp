@@ -8,9 +8,9 @@
 #ifndef SHORTESTPATH_HPP_
 #define SHORTESTPATH_HPP_
 
-#include "points.hpp"
+#include <map>
 
-using namespace std;
+#include "points.hpp"
 
 
 
@@ -26,6 +26,7 @@ public:
 	ShortestPath(Grid *g) { grid=g; }
 	void depthfirst(XYPoint start, XYPoint goal);
 	void breadthfirst(XYPoint start, XYPoint goal);
+	void bfspath(XYPoint start, XYPoint goal);
 	void printfrontier() { printvector(frontier); };
 	void printvisited() { printvector(visited); };
 };

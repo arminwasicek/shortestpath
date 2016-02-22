@@ -24,7 +24,13 @@ void run_dfs()  {
 void run_bfs()  {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
-	bfs.depthfirst(XYPoint(2,3), XYPoint(3,9));
+	bfs.breadthfirst(XYPoint(2,3), XYPoint(3,9));
+}
+
+void run_bfsp()  {
+	Grid grid(10,5);
+	ShortestPath bfs(&grid);
+	bfs.bfspath(XYPoint(2,3), XYPoint(3,9));
 }
 
 
@@ -34,7 +40,7 @@ int main() {
 	cout << "Hello World" << endl;
 	cout << "\033[1;31mbold red text\033[0m\n";
 
-	run_dfs();
+	run_bfsp();
 
 
 	return 0;

@@ -25,6 +25,12 @@ bool XYPoint::equals(XYPoint p) const {
 	return false;
 }
 
+bool XYPoint::issmaller(XYPoint p) const {
+	if((p.x<x) || (p.y<y))  {
+		return true;
+	}
+	return false;
+}
 
 /* =========================================    */
 
