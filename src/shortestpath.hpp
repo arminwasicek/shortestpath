@@ -17,10 +17,14 @@
 class ShortestPath {
 	vector<XYPoint> frontier;
 	vector<XYPoint> visited;
+	map<const XYPoint, XYPoint> camefrom;
 	void visit(XYPoint p);
 	bool isvisited(XYPoint p);
+	bool isvisitedmap(XYPoint p);
+	void visitmap(XYPoint curr, XYPoint from);
 	bool infrontier(XYPoint p);
 	void printvector(vector<XYPoint> v);
+	void printmap(map<const XYPoint, XYPoint> v);
 	Grid *grid = nullptr;
 public:
 	ShortestPath(Grid *g) { grid=g; }
