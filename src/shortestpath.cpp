@@ -42,7 +42,7 @@ inline bool ShortestPath::isvisitedmap(XYPoint p) {
 	return false;
 }
 
-inline void ShortestPath::visitmap(XYPoint curr, XYPoint from) {
+inline void ShortestPath::visitfrom(XYPoint curr, XYPoint from) {
 	if ( !isvisitedmap(curr) ) {
 		camefrom.insert({curr, from});
 	}
@@ -64,7 +64,7 @@ void ShortestPath::printmap(map<XYPoint, XYPoint> v) {
 }
 
 
-void ShortestPath::depthfirst(XYPoint start, XYPoint goal) {
+void ShortestPath::dfs_full_traversal(XYPoint start) {
 	vector<XYPoint>::iterator it;
 	frontier_vec.push_back(start);
 	int c=0;
@@ -92,7 +92,7 @@ void ShortestPath::depthfirst(XYPoint start, XYPoint goal) {
 	cout << "Points visited " << c << endl;
 }
 
-void ShortestPath::breadthfirst(XYPoint start, XYPoint goal) {
+void ShortestPath::bfs_full_traversal(XYPoint start) {
 	frontier_vec.push_back(start);
 	int c=0;
 
@@ -128,7 +128,7 @@ vector<XYPoint> ShortestPath::bfs_with_early_exit(XYPoint start, XYPoint goal) {
 	}
 
 	frontier_vec.push_back(start);
-	visitmap(start,start);
+	visitfrom(start,start);
 
 	int c=0;
 	int vc=0;
@@ -155,7 +155,7 @@ vector<XYPoint> ShortestPath::bfs_with_early_exit(XYPoint start, XYPoint goal) {
 			++vc;
 			if(!isvisitedmap(curr)) {
 				frontier_vec.push_back(curr);
-				visitmap(curr,from);
+				visitfrom(curr,from);
 				cout << curr << endl;
 				c++;
 				grid->setWeight(curr, c);
@@ -172,32 +172,18 @@ vector<XYPoint> ShortestPath::bfs_with_early_exit(XYPoint start, XYPoint goal) {
 	return vector<XYPoint>();
 }
 
-void ShortestPath::bfspath2(XYPoint start, XYPoint goal) {
-	map<XYPoint, XYPoint> cf;
-	int l=0;
-	frontier_vec.push_back(start);
-	cf.insert({start, start}); //visit(start);
-	while(frontier_vec.size()>0) {
-		XYPoint from = frontier_vec.front();
-		frontier_vec.erase(frontier_vec.begin());
-		cout << l << ' ' << from << endl;  l++;
-		vector<XYPoint> n = from.neighbours(*grid);
-		for(auto curr : n) {
-			if ( cf.find(curr) == cf.end() ) {    //if(!isvisited(curr)) {
-				frontier_vec.push_back(curr);
-				cf.insert({curr, curr}); //visit(curr);
-			}
-		}
-	}
-}
 
 vector<XYPoint> ShortestPath::bfs_dijkstra(XYPoint start, XYPoint goal) {
 	vector<XYPoint> res;
 
 	frontier_pq.push(WeightedXYPoint(start,0));
+	visitfrom(start,start);
+	costsofar[start]=0;
 
-
-
+	while(!frontier_pq.empty()) {
+		auto curr = frontier_pq.top();
+		frontier_pq.pop();
+	}
 
 	return res;
 }
