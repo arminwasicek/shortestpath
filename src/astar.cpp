@@ -27,7 +27,7 @@ void run_bfs()  {
 	bfs.breadthfirst(XYPoint(2,3), XYPoint(9,3));
 }
 
-void run_bfsp()  {
+void run_bfs_w_early_exit()  {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
 	auto path = bfs.bfs_with_early_exit(XYPoint(2,3), XYPoint(9,3));
@@ -45,7 +45,7 @@ int main() {
 	cout << "Hello World" << endl;
 	cout << "\033[1;31mbold red text\033[0m\n";
 
-	run_bfsp();
+	run_bfs_w_early_exit();
 
 //	Grid grid(10,5);
 //	ShortestPath bfs(&grid);
