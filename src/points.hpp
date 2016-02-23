@@ -38,6 +38,7 @@ public:
 	WeightedXYPoint(XYPoint p, int w);
 	WeightedXYPoint(int x, int y, int w);
 	int getWeight();
+	bool issmaller(WeightedXYPoint p) const;
 };
 
 
@@ -49,6 +50,7 @@ public:
 	Grid(int w,	int h) { height=h; width=w; }
 	int getWeight(int x, int y);
 	int getWeight(XYPoint p);
+	WeightedXYPoint getWeightedPoint(XYPoint p);
 	void setWeight(int x, int y, int w);
 	void setWeight(XYPoint p, int w);
 	void plot();
@@ -68,6 +70,10 @@ inline bool operator!=(const XYPoint& lhs, const XYPoint& rhs){
 }
 inline ostream& operator<<(ostream& out, const XYPoint& p) {
    return out << '(' << p.getX() << ',' << p.getY() << ')';
+}
+
+inline bool operator<(const WeightedXYPoint& lhs, const WeightedXYPoint& rhs) {
+	return lhs.issmaller(rhs);
 }
 
 

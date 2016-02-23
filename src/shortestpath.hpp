@@ -9,15 +9,18 @@
 #define SHORTESTPATH_HPP_
 
 #include <map>
+#include <queue>
 
 #include "points.hpp"
 
 
 
 class ShortestPath {
-	vector<XYPoint> frontier;
+	vector<XYPoint> frontier_vec;
 	vector<XYPoint> visited;
 	map<XYPoint, XYPoint> camefrom;
+	map<XYPoint, int> costsofar;
+	priority_queue<WeightedXYPoint> frontier_pq;
 	Grid *grid = nullptr;
 	void visit(XYPoint p);
 	bool isvisited(XYPoint p);
@@ -35,8 +38,9 @@ public:
 	void depthfirst(XYPoint start, XYPoint goal);
 	void breadthfirst(XYPoint start, XYPoint goal);
 	vector<XYPoint> bfs_with_early_exit(XYPoint start, XYPoint goal);
+	vector<XYPoint> bfs_dijkstra(XYPoint start, XYPoint goal);
 	void bfspath2(XYPoint start, XYPoint goal);
-	void printfrontier() { printvector(frontier); };
+	void printfrontier() { printvector(frontier_vec); };
 	void printvisited() { printvector(visited); };
 };
 

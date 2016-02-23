@@ -29,6 +29,16 @@ bool XYPoint::issmaller(XYPoint p) const {
 	return tie( x, p.y ) < tie( p.x, y );
 }
 
+bool WeightedXYPoint::issmaller(WeightedXYPoint p) const {
+	if(w<p.w) {
+		return true;
+	}
+	if(w==p.w) {
+		return tie( x, p.y ) < tie( p.x, y );
+	}
+	return false;
+}
+
 /* =========================================    */
 
 WeightedXYPoint::WeightedXYPoint(XYPoint p, int ww)  {
@@ -47,6 +57,14 @@ int WeightedXYPoint::getWeight() {
 	return w;
 }
 
+WeightedXYPoint Grid::getWeightedPoint(XYPoint pp) {
+	for(auto p : points) {
+		if(p==pp) {
+			return p;
+		}
+	}
+	return WeightedXYPoint(pp,0);
+}
 
 /* =========================================    */
 
