@@ -54,6 +54,7 @@ public:
 	void plot();
 	int getHeight()  { return height; }
 	int getWidth()  { return width; }
+	bool inside(XYPoint p);
 };
 
 inline bool operator<(const XYPoint& lhs, const XYPoint& rhs) {

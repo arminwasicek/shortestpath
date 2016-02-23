@@ -26,10 +26,7 @@ bool XYPoint::equals(XYPoint p) const {
 }
 
 bool XYPoint::issmaller(XYPoint p) const {
-	if((p.x<x) || (p.y<y))  {
-		return true;
-	}
-	return false;
+	return tie( x, p.y ) < tie( p.x, y );
 }
 
 /* =========================================    */
@@ -65,10 +62,7 @@ void Grid::setWeight(XYPoint p, int w) {
 
 
 int Grid::getWeight(int x, int y) {
-	vector<WeightedXYPoint>::iterator it;
-
-	for(it=points.begin(); it!=points.end(); ++it) {
-		WeightedXYPoint p = *it;
+	for(auto p : points) {
 		if(p.equals(x,y))
 			return p.getWeight();
 	}
@@ -114,5 +108,11 @@ vector<XYPoint> XYPoint::neighbours(Grid g) {
 	return n;
 }
 
+bool Grid::inside(XYPoint p) {
+	if(((p.getX()>0) && (p.getX()<width)) && ((p.getY()>0) && (p.getY()<height)) ) {
+		return true;
+	}
+	return false;
+}
 
 

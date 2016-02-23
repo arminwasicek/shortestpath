@@ -24,13 +24,13 @@ void run_dfs()  {
 void run_bfs()  {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
-	bfs.breadthfirst(XYPoint(2,3), XYPoint(3,9));
+	bfs.breadthfirst(XYPoint(2,3), XYPoint(9,3));
 }
 
 void run_bfsp()  {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
-	bfs.bfspath(XYPoint(2,3), XYPoint(3,9));
+	bfs.bfspath(XYPoint(2,3), XYPoint(9,3));
 }
 
 
@@ -41,6 +41,18 @@ int main() {
 	cout << "\033[1;31mbold red text\033[0m\n";
 
 	run_bfsp();
+
+//	Grid grid(10,5);
+//	ShortestPath bfs(&grid);
+//	map<const XYPoint, XYPoint> m;
+//
+//	m.insert({XYPoint(1,1), XYPoint(2,1) });
+//	m.insert({XYPoint(1,2), XYPoint(2,2) });
+//	m.insert({XYPoint(1,1), XYPoint(2,3) });
+//
+//	bfs.printmap(m);
+
+
 
 
 	return 0;
