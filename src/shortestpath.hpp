@@ -26,10 +26,12 @@ class ShortestPath {
 	bool infrontier(XYPoint p);
 	void printvector(vector<XYPoint> v);
 	void printmap(map<XYPoint, XYPoint> v);
+	void cleanup();
 
 public:
 
 	ShortestPath(Grid *g) { grid=g; }
+	~ShortestPath() { cleanup(); }
 	void depthfirst(XYPoint start, XYPoint goal);
 	void breadthfirst(XYPoint start, XYPoint goal);
 	void bfspath(XYPoint start, XYPoint goal);

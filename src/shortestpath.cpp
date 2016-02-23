@@ -9,6 +9,11 @@
 
 using namespace std;
 
+void ShortestPath::cleanup() {
+	frontier.clear();
+	visited.clear();
+	camefrom.clear();
+}
 
 bool ShortestPath::isvisited(XYPoint p) {
 	if (find(visited.begin(), visited.end(), p) != visited.end() ) {
