@@ -34,7 +34,7 @@ public:
 	~ShortestPath() { cleanup(); }
 	void depthfirst(XYPoint start, XYPoint goal);
 	void breadthfirst(XYPoint start, XYPoint goal);
-	void bfspath(XYPoint start, XYPoint goal);
+	vector<XYPoint> bfs_with_early_exit(XYPoint start, XYPoint goal);
 	void bfspath2(XYPoint start, XYPoint goal);
 	void printfrontier() { printvector(frontier); };
 	void printvisited() { printvector(visited); };

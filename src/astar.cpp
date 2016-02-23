@@ -30,7 +30,12 @@ void run_bfs()  {
 void run_bfsp()  {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
-	bfs.bfspath(XYPoint(2,3), XYPoint(9,3));
+	auto path = bfs.bfs_with_early_exit(XYPoint(2,3), XYPoint(9,3));
+	cout << "GOAL!! ";
+	for(auto p : path)  {
+		cout << p << ' ';
+	}
+	cout << endl;
 }
 
 

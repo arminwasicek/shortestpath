@@ -15,27 +15,27 @@ void ShortestPath::cleanup() {
 	camefrom.clear();
 }
 
-bool ShortestPath::isvisited(XYPoint p) {
+inline bool ShortestPath::isvisited(XYPoint p) {
 	if (find(visited.begin(), visited.end(), p) != visited.end() ) {
 		return true;
 	}
 	return false;
 }
 
-bool ShortestPath::infrontier(XYPoint p) {
+inline bool ShortestPath::infrontier(XYPoint p) {
 	if (find(frontier.begin(), frontier.end(), p) != frontier.end() ) {
 		return true;
 	}
 	return false;
 }
 
-void ShortestPath::visit(XYPoint p) {
+inline void ShortestPath::visit(XYPoint p) {
 	if ( !isvisited(p) ) {
 		visited.push_back(p);
 	}
 }
 
-bool ShortestPath::isvisitedmap(XYPoint p) {
+inline bool ShortestPath::isvisitedmap(XYPoint p) {
 	if ( camefrom.find(p) != camefrom.end() ) {
 	  return true;
 	}
@@ -121,10 +121,10 @@ void ShortestPath::breadthfirst(XYPoint start, XYPoint goal) {
 
 
 
-void ShortestPath::bfspath(XYPoint start, XYPoint goal) {
+vector<XYPoint> ShortestPath::bfs_with_early_exit(XYPoint start, XYPoint goal) {
 	if(!((grid->inside(start) && grid->inside(goal)))) {
 		//TODO throw exception
-		return ;
+		return vector<XYPoint>();
 	}
 
 	frontier.push_back(start);
@@ -141,20 +141,19 @@ void ShortestPath::bfspath(XYPoint start, XYPoint goal) {
 		cout << frontier.size() << " -> " << grid->getWeight(from) << " " << from << endl;
 
 		if(from==goal) {
-			cout << "GOAL!! ";
+			vector<XYPoint> res;
 			XYPoint p = from;
-			cout << p << ' ';
+			res.push_back(p);
 			while(p!=camefrom[p]) {
 				p = camefrom[p];
-				cout << p << ' ';
+				res.push_back(p);
 			}
-			cout << endl;
-			return ;
+			return res;
 		}
 
 		for(auto curr: from.neighbours(*grid)) {
 			++vc;
-			if(!isvisitedmap(curr) && !infrontier(curr)) {
+			if(!isvisitedmap(curr)) {
 				frontier.push_back(curr);
 				visitmap(curr,from);
 				cout << curr << endl;
@@ -169,6 +168,8 @@ void ShortestPath::bfspath(XYPoint start, XYPoint goal) {
 	cout << "Points visited " << c << endl;
 	cout << "Points checked " << vc << endl;
 	cout << "Map size " << camefrom.size() << endl;
+
+	return vector<XYPoint>();
 }
 
 void ShortestPath::bfspath2(XYPoint start, XYPoint goal) {
