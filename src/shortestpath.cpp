@@ -65,17 +65,20 @@ void ShortestPath::print_vec(vector<XYPoint> v) {
 void ShortestPath::print_map(map<XYPoint, XYPoint> v) {
 	for(auto it : v) {
 		XYPoint p = it.first;
-		cout << grid->getWeight(p)  << " ";
+		//cout << grid->getWeight(p)  << " ";
+		cout << p << ' ';
 	}
 	cout << endl;
 }
 
 
 void ShortestPath::print_pq(priority_queue<WeightedXYPoint> v) {
-	cout << "hello ";
-//	for(auto p : v) {
-//		cout << p << ' ';
-//	}
+	//cout << "hello ";
+	priority_queue<WeightedXYPoint> vv = v;
+	while(!vv.empty()) {
+		cout << vv.top() << ' ';
+		vv.pop();
+	}
 	cout << endl;
 }
 
@@ -217,14 +220,13 @@ vector<XYPoint> ShortestPath::bfs_dijkstra(XYPoint start, XYPoint goal) {
 				costsofar[next]=newcost;
 				frontier_pq.push(WeightedXYPoint(next, newcost));
 				visitfrom(next,curr);
+				cout << next << ' ' << newcost << endl;
 			}
 		}
 		grid->plotw();
 		cout << "frontier = "; print_pq(frontier_pq);
 		cout << "visited  = "; print_map(camefrom);
 	}
-
-
 
 	return res;
 }
