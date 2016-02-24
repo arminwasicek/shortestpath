@@ -24,24 +24,25 @@ class ShortestPath {
 	Grid *grid = nullptr;
 	void visit(XYPoint p);
 	bool isvisited(XYPoint p);
-	inline bool isvisitedmap(XYPoint p);
-	void visitmap(XYPoint curr, XYPoint from);
+	bool incamefrom(XYPoint p);
+	bool incostsofar(XYPoint p);
+	void visitfrom(XYPoint curr, XYPoint from);
 	bool infrontier(XYPoint p);
-	void printvector(vector<XYPoint> v);
-	void printmap(map<XYPoint, XYPoint> v);
+	void print_vec(vector<XYPoint> v);
+	void print_map(map<XYPoint, XYPoint> v);
+	void print_pq(priority_queue<WeightedXYPoint> v);
 	void cleanup();
 
 public:
 
 	ShortestPath(Grid *g) { grid=g; }
 	~ShortestPath() { cleanup(); }
-	void depthfirst(XYPoint start, XYPoint goal);
-	void breadthfirst(XYPoint start, XYPoint goal);
+	void dfs_full_traversal(XYPoint start);
+	void bfs_full_traversal(XYPoint start);
 	vector<XYPoint> bfs_with_early_exit(XYPoint start, XYPoint goal);
 	vector<XYPoint> bfs_dijkstra(XYPoint start, XYPoint goal);
-	void bfspath2(XYPoint start, XYPoint goal);
-	void printfrontier() { printvector(frontier_vec); };
-	void printvisited() { printvector(visited); };
+	void printfrontier() { print_vec(frontier_vec); };
+	void printvisited() { print_vec(visited); };
 };
 
 

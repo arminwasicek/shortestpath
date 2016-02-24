@@ -50,10 +50,12 @@ public:
 	Grid(int w,	int h) { height=h; width=w; }
 	int getWeight(int x, int y);
 	int getWeight(XYPoint p);
+	int getCost(XYPoint a, XYPoint b);
 	WeightedXYPoint getWeightedPoint(XYPoint p);
 	void setWeight(int x, int y, int w);
 	void setWeight(XYPoint p, int w);
 	void plot();
+	void plotw();
 	int getHeight()  { return height; }
 	int getWidth()  { return width; }
 	bool inside(XYPoint p);

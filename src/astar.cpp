@@ -18,13 +18,13 @@ using namespace std;
 void run_dfs()  {
 	Grid grid(10,5);
 	ShortestPath dfs(&grid);
-	dfs.depthfirst(XYPoint(2,3), XYPoint(3,9));
+	dfs.dfs_full_traversal(XYPoint(2,3));
 }
 
 void run_bfs()  {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
-	bfs.breadthfirst(XYPoint(2,3), XYPoint(9,3));
+	bfs.bfs_full_traversal(XYPoint(2,3));
 }
 
 void run_bfs_w_early_exit()  {
@@ -51,10 +51,6 @@ void run_dijkstra() {
 	grid.setWeight(6,1,1);
 	grid.setWeight(6,2,1);
 	grid.setWeight(6,3,1);
-
-	auto p = grid.getWeightedPoint(XYPoint(6,1));
-
-	cout << grid.getWeightedPoint(XYPoint(6,1)) << endl;
 
 	auto path = bfs.bfs_dijkstra(XYPoint(2,3), XYPoint(9,3));
 

@@ -92,6 +92,13 @@ int Grid::getWeight(XYPoint p) {
 	return getWeight(p.getX(), p.getY());
 }
 
+int Grid::getCost(XYPoint a, XYPoint b) {
+	int d = getWeight(b)-getWeight(a);
+	if(d<=0) {
+		return 0;
+	}
+	return d;
+}
 
 void Grid::plot() {
 	for(int i=0; i<height; i++) {
@@ -101,6 +108,19 @@ void Grid::plot() {
 					cout << " . ";
 				else
 					cout << setfill(' ') << setw(3) << w;
+		}
+		cout << endl;
+	}
+}
+
+void Grid::plotw() {
+	for(int i=0; i<height; i++) {
+		for(int j=0; j<width; j++) {
+			int w = getWeight(j,i);
+			if(w<1)
+				cout << " . ";
+			else
+				cout << setfill(' ') << setw(3) << w;
 		}
 		cout << endl;
 	}
