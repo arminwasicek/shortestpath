@@ -10,6 +10,7 @@
 #include <vector>
 #include "points.hpp"
 #include "shortestpath.hpp"
+#include "screen.hpp"
 
 using namespace std;
 
@@ -74,7 +75,14 @@ int main() {
 //	run_bfs_w_early_exit();
 
 
-	run_dijkstra();
+	//run_dijkstra();
+
+	Screen scr;
+
+	for(int i=0; i<10; i++) {
+		scr.set(i, 0, 'X', A_UNDERLINE);
+	}
+	getch();
 
 
 	return 0;
