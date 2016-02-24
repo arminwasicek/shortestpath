@@ -35,33 +35,50 @@ inline void ShortestPath::visit(XYPoint p) {
 	}
 }
 
-inline bool ShortestPath::isvisitedmap(XYPoint p) {
+inline bool ShortestPath::incamefrom(XYPoint p) {
 	if ( camefrom.find(p) != camefrom.end() ) {
 	  return true;
 	}
 	return false;
 }
 
+inline bool ShortestPath::incostsofar(XYPoint p) {
+	if ( costsofar.find(p) != costsofar.end() ) {
+	  return true;
+	}
+	return false;
+}
+
 inline void ShortestPath::visitfrom(XYPoint curr, XYPoint from) {
-	if ( !isvisitedmap(curr) ) {
+	if ( !incamefrom(curr) ) {
 		camefrom.insert({curr, from});
 	}
 }
 
-void ShortestPath::printvector(vector<XYPoint> v) {
+void ShortestPath::print_vec(vector<XYPoint> v) {
 	for(auto p : v) {
 		cout << grid->getWeight(p) << ' ';
 	}
 	cout << endl;
 }
 
-void ShortestPath::printmap(map<XYPoint, XYPoint> v) {
+void ShortestPath::print_map(map<XYPoint, XYPoint> v) {
 	for(auto it : v) {
 		XYPoint p = it.first;
 		cout << grid->getWeight(p)  << " ";
 	}
 	cout << endl;
 }
+
+
+void ShortestPath::print_pq(priority_queue<WeightedXYPoint> v) {
+	cout << "hello ";
+//	for(auto p : v) {
+//		cout << p << ' ';
+//	}
+	cout << endl;
+}
+
 
 
 void ShortestPath::dfs_full_traversal(XYPoint start) {
@@ -153,7 +170,7 @@ vector<XYPoint> ShortestPath::bfs_with_early_exit(XYPoint start, XYPoint goal) {
 
 		for(auto curr: from.neighbours(*grid)) {
 			++vc;
-			if(!isvisitedmap(curr)) {
+			if(!incamefrom(curr)) {
 				frontier_vec.push_back(curr);
 				visitfrom(curr,from);
 				cout << curr << endl;
@@ -163,7 +180,7 @@ vector<XYPoint> ShortestPath::bfs_with_early_exit(XYPoint start, XYPoint goal) {
 		}
 		grid->plot();
 		cout << "frontier = "; printfrontier();
-		cout << "visited  = "; printmap(camefrom);
+		cout << "visited  = "; print_map(camefrom);
 	}
 	cout << "Points visited " << c << endl;
 	cout << "Points checked " << vc << endl;
@@ -183,7 +200,31 @@ vector<XYPoint> ShortestPath::bfs_dijkstra(XYPoint start, XYPoint goal) {
 	while(!frontier_pq.empty()) {
 		auto curr = frontier_pq.top();
 		frontier_pq.pop();
+
+		if(curr==goal) {
+			XYPoint p = curr;
+			res.push_back(p);
+			while(p!=camefrom[p]) {
+				p = camefrom[p];
+				res.push_back(p);
+			}
+			break;
+		}
+
+		for(auto next : curr.neighbours(*grid)) {
+			int newcost = costsofar[curr] + grid->getCost(curr, next);
+			if( !incostsofar(next) || (newcost<costsofar[next] ))  {
+				costsofar[next]=newcost;
+				frontier_pq.push(WeightedXYPoint(next, newcost));
+				visitfrom(next,curr);
+			}
+		}
+		grid->plotw();
+		cout << "frontier = "; print_pq(frontier_pq);
+		cout << "visited  = "; print_map(camefrom);
 	}
+
+
 
 	return res;
 }
