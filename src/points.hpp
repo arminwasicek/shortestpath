@@ -39,6 +39,14 @@ public:
 	WeightedXYPoint(int x, int y, int w);
 	int getWeight();
 	bool issmaller(WeightedXYPoint p) const;
+
+	struct compare
+	{
+	  bool operator()(const WeightedXYPoint& l, const WeightedXYPoint& r)
+	  {
+	      return !l.issmaller(r);
+	  }
+	};
 };
 
 
@@ -77,6 +85,10 @@ inline ostream& operator<<(ostream& out, const XYPoint& p) {
 inline bool operator<(const WeightedXYPoint& lhs, const WeightedXYPoint& rhs) {
 	return lhs.issmaller(rhs);
 }
+inline bool operator>(const WeightedXYPoint& lhs, const WeightedXYPoint& rhs) {
+	return !lhs.issmaller(rhs);
+}
+
 
 
 #endif /* POINTS_HPP_ */

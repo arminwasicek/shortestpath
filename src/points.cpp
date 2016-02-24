@@ -39,6 +39,7 @@ bool WeightedXYPoint::issmaller(WeightedXYPoint p) const {
 	return false;
 }
 
+
 /* =========================================    */
 
 WeightedXYPoint::WeightedXYPoint(XYPoint p, int ww)  {
@@ -95,8 +96,9 @@ int Grid::getWeight(XYPoint p) {
 int Grid::getCost(XYPoint a, XYPoint b) {
 	int d = getWeight(b)-getWeight(a);
 	if(d<=0) {
-		return 0;
+		d = 0;
 	}
+	d += abs(a.getX()-b.getX()) + abs(a.getY()-b.getY());
 	return d;
 }
 

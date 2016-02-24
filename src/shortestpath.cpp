@@ -72,9 +72,9 @@ void ShortestPath::print_map(map<XYPoint, XYPoint> v) {
 }
 
 
-void ShortestPath::print_pq(priority_queue<WeightedXYPoint> v) {
+void ShortestPath::print_pq(priorityqueue v) {
 	//cout << "hello ";
-	priority_queue<WeightedXYPoint> vv = v;
+	priorityqueue vv = v;
 	while(!vv.empty()) {
 		cout << vv.top() << ' ';
 		vv.pop();
@@ -211,13 +211,15 @@ vector<XYPoint> ShortestPath::bfs_dijkstra(XYPoint start, XYPoint goal) {
 				p = camefrom[p];
 				res.push_back(p);
 			}
+			cout << costsofar[curr] << endl;
 			break;
 		}
 
 		for(auto next : curr.neighbours(*grid)) {
 			int newcost = costsofar[curr] + grid->getCost(curr, next);
 			if( !incostsofar(next) || (newcost<costsofar[next] ))  {
-				costsofar[next]=newcost;
+				costsofar[(XYPoint) next]=newcost;
+				//costsofar.insert({(XYPoint)next, newcost});
 				frontier_pq.push(WeightedXYPoint(next, newcost));
 				visitfrom(next,curr);
 				cout << next << ' ' << newcost << endl;

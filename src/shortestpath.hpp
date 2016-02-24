@@ -13,14 +13,15 @@
 
 #include "points.hpp"
 
-
+typedef priority_queue<WeightedXYPoint,vector<WeightedXYPoint>, WeightedXYPoint::compare> priorityqueue;
 
 class ShortestPath {
 	vector<XYPoint> frontier_vec;
 	vector<XYPoint> visited;
 	map<XYPoint, XYPoint> camefrom;
 	map<XYPoint, int> costsofar;
-	priority_queue<WeightedXYPoint> frontier_pq;
+	//priority_queue<WeightedXYPoint> frontier_pq;
+	priorityqueue frontier_pq;
 	Grid *grid = nullptr;
 	void visit(XYPoint p);
 	bool isvisited(XYPoint p);
@@ -30,7 +31,7 @@ class ShortestPath {
 	bool infrontier(XYPoint p);
 	void print_vec(vector<XYPoint> v);
 	void print_map(map<XYPoint, XYPoint> v);
-	void print_pq(priority_queue<WeightedXYPoint> v);
+	void print_pq(priorityqueue v);
 	void cleanup();
 
 public:
