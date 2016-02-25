@@ -87,7 +87,7 @@ void ShortestPath::plot_pq(priorityqueue v) {
 	while(!vv.empty()) {
 		XYPoint p = vv.top();
 		vv.pop();
-		screen->set(p.getX(), p.getY(), '#', Screen::COL_CLEAR, 0);
+		screen->set(p.getX(), p.getY(), '#', 0, 0);
 	}
 }
 
@@ -213,22 +213,22 @@ vector<XYPoint> ShortestPath::bfs_dijkstra(XYPoint start, XYPoint goal) {
 		auto curr = frontier_pq.top();
 		frontier_pq.pop();
 
-		if(curr==goal) {
-			XYPoint p = curr;
-			res.push_back(p);
-			while(p!=camefrom[p]) {
-				p = camefrom[p];
-				res.push_back(p);
-			}
-			break;
-		}
-
 		for(auto next : curr.neighbours(*grid)) {
 			int newcost = costsofar[curr] + grid->getCost(curr, next);
 			if( !incostsofar(next) || (newcost<costsofar[next] ))  {
 				costsofar[(XYPoint) next]=newcost;
 				frontier_pq.push(WeightedXYPoint(next, newcost));
 				visitfrom(next,curr);
+				if(next==goal) {
+					cout << "found" << endl;
+					XYPoint p = next;
+					res.push_back(p);
+					while(p!=camefrom[p]) {
+						p = camefrom[p];
+						res.push_back(p);
+					}
+					return res;
+				}
 			}
 		}
 		grid->plotw(screen);

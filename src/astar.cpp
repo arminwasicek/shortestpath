@@ -39,7 +39,7 @@ void run_bfs_w_early_exit()  {
 	cout << endl;
 }
 
-void run_dijkstra() {
+vector<XYPoint> run_dijkstra() {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
 
@@ -53,15 +53,8 @@ void run_dijkstra() {
 	grid.setWeight(6,2,1);
 	grid.setWeight(6,3,1);
 
-	auto path = bfs.bfs_dijkstra(XYPoint(2,3), XYPoint(9,3));
+	return bfs.bfs_dijkstra(XYPoint(2,3), XYPoint(9,3));
 
-	if(!path.empty()) {
-		cout << "GOAL!! ";
-		for(auto p : path)  {
-			cout << p << ' ';
-		}
-		cout << endl;
-	}
 }
 
 
@@ -75,7 +68,15 @@ int main() {
 //	run_bfs_w_early_exit();
 
 
-	run_dijkstra();
+	auto path = run_dijkstra();
+
+	if(!path.empty()) {
+		cout << "GOAL!! ";
+		for(auto p : path)  {
+			cout << p << ' ';
+		}
+		cout << endl;
+	}
 
 //	Screen scr;
 //

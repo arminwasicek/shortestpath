@@ -19,6 +19,7 @@ class Screen {
 	unsigned int *buffer;
 	unsigned int height;
 	unsigned int width;
+	bool tty;
 public:
 	Screen(unsigned int h, unsigned int w);
 	~Screen();
