@@ -12,6 +12,8 @@
 #include <iostream>
 #include <iomanip>
 
+#include "screen.hpp"
+
 using namespace std;
 
 class Grid;
@@ -63,7 +65,7 @@ public:
 	void setWeight(int x, int y, int w);
 	void setWeight(XYPoint p, int w);
 	void plot();
-	void plotw();
+	void plotw(Screen *scr);
 	int getHeight()  { return height; }
 	int getWidth()  { return width; }
 	bool inside(XYPoint p);

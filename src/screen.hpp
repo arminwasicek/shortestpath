@@ -11,7 +11,7 @@
 #include <ncurses.h>
 #include <iostream>
 
-#include "points.hpp"
+//#include "points.hpp"
 
 using namespace std;
 
@@ -20,7 +20,7 @@ public:
 	Screen();
 	~Screen();
 	void set(int x, int y, char c, unsigned int col, unsigned int att);
-	void set(XYPoint p, char c, unsigned int col, unsigned int att);
+	//void set(XYPoint p, char c, unsigned int col, unsigned int att);
 
 	enum palette {
 		COL_FLAT = 9,

@@ -115,17 +115,21 @@ void Grid::plot() {
 	}
 }
 
-void Grid::plotw() {
+void Grid::plotw(Screen *scr) {
 	for(int i=0; i<height; i++) {
 		for(int j=0; j<width; j++) {
 			int w = getWeight(j,i);
-			if(w<1)
-				cout << " . ";
-			else
-				cout << setfill(' ') << setw(3) << w;
+
+			if(w==0) {
+				scr->set(j, i, ' ', Screen::COL_MNT, 0);
+			}
+			else {
+				char c = '0' + (char)(w % 10);
+				scr->set(j, i, c, Screen::COL_FLAT, 0);
+			}
 		}
-		cout << endl;
 	}
+	getch();
 }
 
 

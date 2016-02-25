@@ -75,15 +75,15 @@ int main() {
 //	run_bfs_w_early_exit();
 
 
-	//run_dijkstra();
+	run_dijkstra();
 
-	Screen scr;
-
-	for(int i=0; i<10; i++) {
-		XYPoint p(i,0);
-		scr.set(p, 'X', Screen::COL_MNT, A_UNDERLINE);
-	}
-	getch();
+//	Screen scr;
+//
+//	for(int i=0; i<10; i++) {
+//		XYPoint p(i,0);
+//		scr.set(p.getX(), p.getY(), 'X', Screen::COL_MNT, A_UNDERLINE);
+//	}
+//	getch();
 
 
 	return 0;

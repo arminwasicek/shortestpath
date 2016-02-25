@@ -226,7 +226,7 @@ vector<XYPoint> ShortestPath::bfs_dijkstra(XYPoint start, XYPoint goal) {
 				cout << next << ' ' << newcost << endl;
 			}
 		}
-		grid->plotw();
+		grid->plotw(screen);
 		cout << "frontier = "; print_pq(frontier_pq);
 		cout << "visited  = "; print_map(camefrom);
 	}
