@@ -15,7 +15,6 @@
 using namespace std;
 
 
-
 void run_dfs()  {
 	Grid grid(10,5);
 	ShortestPath dfs(&grid);
@@ -54,9 +53,24 @@ vector<XYPoint> run_dijkstra() {
 	grid.setWeight(6,3,1);
 
 	return bfs.bfs_dijkstra(XYPoint(2,3), XYPoint(9,3));
-
 }
 
+vector<XYPoint> run_greedy() {
+	Grid grid(10,5);
+	ShortestPath bfs(&grid);
+
+	grid.setWeight(4,1,1);
+	grid.setWeight(4,2,1);
+	grid.setWeight(4,3,1);
+	grid.setWeight(5,1,2);
+	grid.setWeight(5,2,2);
+	grid.setWeight(5,3,2);
+	grid.setWeight(6,1,1);
+	grid.setWeight(6,2,1);
+	grid.setWeight(6,3,1);
+
+	return bfs.bfs_greedy(XYPoint(2,3), XYPoint(9,3));
+}
 
 
 
@@ -68,7 +82,7 @@ int main() {
 //	run_bfs_w_early_exit();
 
 
-	auto path = run_dijkstra();
+	auto path = run_greedy();
 
 	if(!path.empty()) {
 		cout << "GOAL!! ";

@@ -10,6 +10,7 @@
 
 #include <map>
 #include <queue>
+#include <unistd.h>
 
 #include "points.hpp"
 #include "screen.hpp"
@@ -45,6 +46,7 @@ public:
 	void bfs_full_traversal(XYPoint start);
 	vector<XYPoint> bfs_with_early_exit(XYPoint start, XYPoint goal);
 	vector<XYPoint> bfs_dijkstra(XYPoint start, XYPoint goal);
+	vector<XYPoint> bfs_greedy(XYPoint start, XYPoint goal);
 	void printfrontier() { print_vec(frontier_vec); };
 	void printvisited() { print_vec(visited); };
 };
