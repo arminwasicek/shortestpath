@@ -21,6 +21,8 @@ Screen::Screen()  {
     init_color(COL_MNT, 20, 680, 0);
     init_pair(COL_MNT, COLOR_BLACK, COL_MNT);
     init_pair(COL_FLAT, COLOR_BLACK, COL_FLAT);
+    init_pair(COL_MNT_P, COLOR_BLUE, COL_MNT);
+    init_pair(COL_CLEAR, COLOR_WHITE, COLOR_BLACK);
 }
 
 Screen::~Screen()  {

@@ -24,7 +24,9 @@ public:
 
 	enum palette {
 		COL_FLAT = 9,
-		COL_MNT
+		COL_MNT,
+		COL_MNT_P,
+		COL_CLEAR
 	};
 };
 

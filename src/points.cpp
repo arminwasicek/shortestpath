@@ -129,7 +129,6 @@ void Grid::plotw(Screen *scr) {
 			}
 		}
 	}
-	getch();
 }
 
 
