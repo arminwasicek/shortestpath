@@ -74,10 +74,19 @@ void ShortestPath::print_map(map<XYPoint, XYPoint> v) {
 
 
 void ShortestPath::print_pq(priorityqueue v) {
-	//cout << "hello ";
 	priorityqueue vv = v;
 	while(!vv.empty()) {
 		cout << vv.top() << ' ';
+		vv.pop();
+	}
+	cout << endl;
+}
+
+void ShortestPath::plot_pq(priorityqueue v) {
+	priorityqueue vv = v;
+	while(!vv.empty()) {
+		XYPoint p = vv.top();
+		screen->set(p.getX(), p.getY(), 'x', Screen::COL_F1, 0);
 		vv.pop();
 	}
 	cout << endl;
@@ -212,7 +221,6 @@ vector<XYPoint> ShortestPath::bfs_dijkstra(XYPoint start, XYPoint goal) {
 				p = camefrom[p];
 				res.push_back(p);
 			}
-			cout << costsofar[curr] << endl;
 			break;
 		}
 
@@ -220,22 +228,15 @@ vector<XYPoint> ShortestPath::bfs_dijkstra(XYPoint start, XYPoint goal) {
 			int newcost = costsofar[curr] + grid->getCost(curr, next);
 			if( !incostsofar(next) || (newcost<costsofar[next] ))  {
 				costsofar[(XYPoint) next]=newcost;
-				//costsofar.insert({(XYPoint)next, newcost});
 				frontier_pq.push(WeightedXYPoint(next, newcost));
 				visitfrom(next,curr);
-				cout << next << ' ' << newcost << endl;
 			}
 		}
 		grid->plotw(screen);
 		screen->set(start.getX(), start.getY(), 'X', Screen::COL_MNT_P, 0);
 		screen->set(goal.getX(), goal.getY(), 'O', Screen::COL_MNT_P, 0);
-
-
-
-
+		plot_pq(frontier_pq);
 		getch();
-		cout << "frontier = "; print_pq(frontier_pq);
-		cout << "visited  = "; print_map(camefrom);
 	}
 
 	return res;
