@@ -81,7 +81,7 @@ int main() {
 
 	for(int i=0; i<10; i++) {
 		XYPoint p(i,0);
-		scr.set(p, 'X', A_UNDERLINE);
+		scr.set(p, 'X', Screen::COL_MNT, A_UNDERLINE);
 	}
 	getch();
 

@@ -19,8 +19,13 @@ class Screen {
 public:
 	Screen();
 	~Screen();
-	void set(int x, int y, char c, unsigned int att);
-	void set(XYPoint p, char c, unsigned int att);
+	void set(int x, int y, char c, unsigned int col, unsigned int att);
+	void set(XYPoint p, char c, unsigned int col, unsigned int att);
+
+	enum palette {
+		COL_FLAT = 9,
+		COL_MNT
+	};
 };
 
 
