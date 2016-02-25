@@ -23,6 +23,7 @@ Screen::Screen()  {
     init_pair(COL_FLAT, COLOR_BLACK, COL_FLAT);
     init_pair(COL_MNT_P, COLOR_BLUE, COL_MNT);
     init_pair(COL_CLEAR, COLOR_WHITE, COLOR_BLACK);
+    init_pair(COL_F1, COLOR_GREEN, COL_MNT);
 }
 
 Screen::~Screen()  {

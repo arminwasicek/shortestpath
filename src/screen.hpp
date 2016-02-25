@@ -26,7 +26,8 @@ public:
 		COL_FLAT = 9,
 		COL_MNT,
 		COL_MNT_P,
-		COL_CLEAR
+		COL_CLEAR,
+		COL_F1
 	};
 };
 
