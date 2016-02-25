@@ -87,9 +87,8 @@ void ShortestPath::plot_pq(priorityqueue v) {
 	while(!vv.empty()) {
 		XYPoint p = vv.top();
 		vv.pop();
-		screen->set(p.getX(), p.getY(), 'x', Screen::COL_F1, 0);
+		screen->set(p.getX(), p.getY(), '#', Screen::COL_CLEAR, 0);
 	}
-	cout << endl;
 }
 
 

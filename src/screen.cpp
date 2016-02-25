@@ -50,7 +50,6 @@ void Screen::update() {
 	for(int i=0; i<width; i++)  {
 		for(int j=0; j<height; j++) {
 			mvwaddch(stdscr, j, i, buffer[i+j*width]);
-			//cout << i << ' ' << j << ' ' << buffer[i+j*width] << endl;
 		}
 	}
 	refresh();
