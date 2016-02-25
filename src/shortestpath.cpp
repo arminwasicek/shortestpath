@@ -13,6 +13,7 @@ void ShortestPath::cleanup() {
 	frontier_vec.clear();
 	visited.clear();
 	camefrom.clear();
+	delete screen;
 }
 
 inline bool ShortestPath::isvisited(XYPoint p) {

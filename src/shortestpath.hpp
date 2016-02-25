@@ -12,6 +12,7 @@
 #include <queue>
 
 #include "points.hpp"
+#include "screen.hpp"
 
 typedef priority_queue<WeightedXYPoint,vector<WeightedXYPoint>, WeightedXYPoint::compare> priorityqueue;
 
@@ -23,6 +24,7 @@ class ShortestPath {
 	//priority_queue<WeightedXYPoint> frontier_pq;
 	priorityqueue frontier_pq;
 	Grid *grid = nullptr;
+	Screen *screen = nullptr;
 	void visit(XYPoint p);
 	bool isvisited(XYPoint p);
 	bool incamefrom(XYPoint p);
@@ -36,7 +38,7 @@ class ShortestPath {
 
 public:
 
-	ShortestPath(Grid *g) { grid=g; }
+	ShortestPath(Grid *g) { grid=g; screen = new Screen(); }
 	~ShortestPath() { cleanup(); }
 	void dfs_full_traversal(XYPoint start);
 	void bfs_full_traversal(XYPoint start);
