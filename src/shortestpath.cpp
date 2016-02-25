@@ -86,8 +86,8 @@ void ShortestPath::plot_pq(priorityqueue v) {
 	priorityqueue vv = v;
 	while(!vv.empty()) {
 		XYPoint p = vv.top();
-		screen->set(p.getX(), p.getY(), 'x', Screen::COL_F1, 0);
 		vv.pop();
+		screen->set(p.getX(), p.getY(), 'x', Screen::COL_F1, 0);
 	}
 	cout << endl;
 }
@@ -236,6 +236,7 @@ vector<XYPoint> ShortestPath::bfs_dijkstra(XYPoint start, XYPoint goal) {
 		screen->set(start.getX(), start.getY(), 'X', Screen::COL_MNT_P, 0);
 		screen->set(goal.getX(), goal.getY(), 'O', Screen::COL_MNT_P, 0);
 		plot_pq(frontier_pq);
+
 		getch();
 	}
 
