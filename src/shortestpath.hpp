@@ -34,6 +34,7 @@ class ShortestPath {
 	void print_vec(vector<XYPoint> v);
 	void print_map(map<XYPoint, XYPoint> v);
 	void print_pq(priorityqueue v);
+	void plot_pq(priorityqueue v);
 	void cleanup();
 
 public:

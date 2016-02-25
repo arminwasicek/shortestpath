@@ -40,3 +40,7 @@ void Screen::set(int x, int y, char c, unsigned int col, unsigned int att) {
 //void Screen::set(XYPoint p, char c, unsigned int col, unsigned int att) {
 //	set(p.getX(), p.getY(), c, col, att);
 //}
+
+void Screen::update() {
+	refresh();
+}

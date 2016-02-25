@@ -21,6 +21,7 @@ public:
 	~Screen();
 	void set(int x, int y, char c, unsigned int col, unsigned int att);
 	//void set(XYPoint p, char c, unsigned int col, unsigned int att);
+	void update();
 
 	enum palette {
 		COL_FLAT = 9,
