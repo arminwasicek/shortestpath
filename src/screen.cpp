@@ -52,10 +52,21 @@ void Screen::set(int x, int y, char c, unsigned int col, unsigned int att) {
 
 
 void Screen::update() {
-	for(int i=0; i<width; i++)  {
-		for(int j=0; j<height; j++) {
-			mvwaddch(stdscr, j, i, buffer[i+j*width]);
+	if(tty) {
+		for(int i=0; i<width; i++)  {
+			for(int j=0; j<height; j++) {
+				mvwaddch(stdscr, j, i, buffer[i+j*width]);
+			}
+		}
+		refresh();
+	}
+	else {
+		for(int i=0; i<width; i++)  {
+			for(int j=0; j<height; j++) {
+				char ch = buffer[i+j*width] & 0xFFFFFF00;
+				cout << ch;
+			}
+			cout << endl;
 		}
 	}
-	refresh();
 }
