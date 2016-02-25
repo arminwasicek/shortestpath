@@ -80,7 +80,8 @@ int main() {
 	Screen scr;
 
 	for(int i=0; i<10; i++) {
-		scr.set(i, 0, 'X', A_UNDERLINE);
+		XYPoint p(i,0);
+		scr.set(p, 'X', A_UNDERLINE);
 	}
 	getch();
 

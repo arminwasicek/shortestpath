@@ -28,3 +28,6 @@ void Screen::set(int x, int y, char c, unsigned int att) {
 	refresh();
 }
 
+void Screen::set(XYPoint p, char c, unsigned int att) {
+	set(p.getX(), p.getY(), c, att);
+}

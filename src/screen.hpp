@@ -11,6 +11,8 @@
 #include <ncurses.h>
 #include <iostream>
 
+#include "points.hpp"
+
 using namespace std;
 
 class Screen {
@@ -18,6 +20,7 @@ public:
 	Screen();
 	~Screen();
 	void set(int x, int y, char c, unsigned int att);
+	void set(XYPoint p, char c, unsigned int att);
 };
 
 
