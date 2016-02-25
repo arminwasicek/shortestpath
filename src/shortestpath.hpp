@@ -39,7 +39,7 @@ class ShortestPath {
 
 public:
 
-	ShortestPath(Grid *g) { grid=g; screen = new Screen(); }
+	ShortestPath(Grid *g) { grid=g; screen = new Screen(grid->getHeight(), grid->getWidth()); }
 	~ShortestPath() { cleanup(); }
 	void dfs_full_traversal(XYPoint start);
 	void bfs_full_traversal(XYPoint start);

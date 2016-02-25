@@ -236,7 +236,7 @@ vector<XYPoint> ShortestPath::bfs_dijkstra(XYPoint start, XYPoint goal) {
 		screen->set(start.getX(), start.getY(), 'X', Screen::COL_MNT_P, 0);
 		screen->set(goal.getX(), goal.getY(), 'O', Screen::COL_MNT_P, 0);
 		plot_pq(frontier_pq);
-
+		screen->update();
 		getch();
 	}
 

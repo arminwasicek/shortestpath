@@ -16,8 +16,11 @@
 using namespace std;
 
 class Screen {
+	unsigned int *buffer;
+	unsigned int height;
+	unsigned int width;
 public:
-	Screen();
+	Screen(unsigned int h, unsigned int w);
 	~Screen();
 	void set(int x, int y, char c, unsigned int col, unsigned int att);
 	//void set(XYPoint p, char c, unsigned int col, unsigned int att);

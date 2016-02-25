@@ -9,7 +9,7 @@
 #include "screen.hpp"
 
 
-Screen::Screen()  {
+Screen::Screen(unsigned int h, unsigned int w)  {
 	if(isatty(fileno(stdout)))  {
 		cout << "is a tty :)" << endl;
 	}
@@ -24,17 +24,22 @@ Screen::Screen()  {
     init_pair(COL_MNT_P, COLOR_BLUE, COL_MNT);
     init_pair(COL_CLEAR, COLOR_WHITE, COLOR_BLACK);
     init_pair(COL_F1, COLOR_GREEN, COL_MNT);
+
+
+    buffer = new unsigned int[w*h];
+    height = h;
+    width = w;
 }
 
 Screen::~Screen()  {
+	free(buffer);
     endwin();
 }
 
 
 void Screen::set(int x, int y, char c, unsigned int col, unsigned int att) {
 	unsigned int ch = c | COLOR_PAIR(col) | att;
-	mvwaddch(stdscr, y, x, ch);
-	refresh();
+	buffer[x+y*width] = ch;
 }
 
 //void Screen::set(XYPoint p, char c, unsigned int col, unsigned int att) {
@@ -42,5 +47,11 @@ void Screen::set(int x, int y, char c, unsigned int col, unsigned int att) {
 //}
 
 void Screen::update() {
+	for(int i=0; i<width; i++)  {
+		for(int j=0; j<height; j++) {
+			mvwaddch(stdscr, j, i, buffer[i+j*width]);
+			//cout << i << ' ' << j << ' ' << buffer[i+j*width] << endl;
+		}
+	}
 	refresh();
 }
