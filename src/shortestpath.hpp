@@ -15,10 +15,25 @@
 #include "points.hpp"
 #include "screen.hpp"
 
-/*! \brief Type
+/*! \brief Type shorthand for a priority queue storing weighted points.
  */
 typedef priority_queue<WeightedPoint2D,vector<WeightedPoint2D>, WeightedPoint2D::compare> weightedpointpq;
 
+/*! \brief The ShortestPath class implements data structures and algorithms to compute
+ * 		   the shortest path in a Grid.
+ *
+ * 	The class implements the shortest path algorithms Dijstra, Greedy, and A*. It uses
+ * 	several data structures from the STL such as vector, map, and priority queues and
+ * 	it defines operation to check is points are contained, or other relations between
+ * 	points. These relations are mostly of a temporal nature and arise outof the context
+ * 	of executing a certain algorithm. \par
+ *
+ * 	The main purpose of the library is to be educational, it has not been optimized for
+ * 	any usage in  a real system.
+ *
+ * 	\note The descriptions in [here](http://www.redblobgames.com/pathfinding/a-star/introduction.html)
+ * 		  were very helpful to implement the search algorithms.
+ */
 class ShortestPath {
 	vector<Point2D> frontier_vec;
 	vector<Point2D> visited;
@@ -42,10 +57,22 @@ class ShortestPath {
 
 public:
 
+	/*! \brief Constructs a ShortestPath object with respect to a certain grid.
+	 *
+	 * The constructor allocates all datastructures required for the execution of the
+	 * implemented shortest path search algorithms. Moreover, it instantiates a Screen
+	 * object that can be used for various output and visualization variants.
+	 *
+	 * @param[in] g	 The grid on which the algorithms are operating on.
+	 */
 	ShortestPath(Grid *g) { grid=g; screen = new Screen(grid->getHeight(), grid->getWidth()); }
+
+	/*! \brief Releases resources and empties the temporary data in the containers.
+	 */
 	~ShortestPath() { cleanup(); }
-	void dfs_full_traversal(Point2D start);
-	void bfs_full_traversal(Point2D start);
+
+	/*! \brief Type shorthand for a priority queue storing weighted points.
+	 */
 	vector<Point2D> bfs_with_early_exit(Point2D start, Point2D goal);
 	vector<Point2D> bfs_dijkstra(Point2D start, Point2D goal);
 	vector<Point2D> bfs_greedy(Point2D start, Point2D goal);
