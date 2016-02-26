@@ -8,6 +8,7 @@ Several shortest path algorithms in C++ for educational purposes:
 
 ## Usage
 
+```
 astar [-a|-d|-g] [-f file]
 
 
