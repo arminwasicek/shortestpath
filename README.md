@@ -12,8 +12,12 @@ astar [-a|-d|-g] [-f file]
 
 
   -a ... Use A* algorithm
+  
   -d ... Use Dijkstra's algorithm
+  
   -g ... Use Greedy algorithm
+
+
 
   -f file ... Specify map file to use
 
