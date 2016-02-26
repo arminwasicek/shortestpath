@@ -22,5 +22,6 @@ astar [-a|-d|-g] [-f file]
   -f file ... Specify map file to use
 
 ### Example
+```bash
 ./astar -a -f maps/mymaze3.map
 
