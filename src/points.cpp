@@ -10,36 +10,36 @@
 
 /* =========================================    */
 
-XYPoint::XYPoint(int xx, int yy) {
+Point2D::Point2D(int xx, int yy) {
 	x=xx; y=yy;
 }
 
-bool XYPoint::equals(int xx, int yy) const {
-	return equals(XYPoint(xx,yy));
+bool Point2D::equals(int xx, int yy) const {
+	return equals(Point2D(xx,yy));
 }
 
-bool XYPoint::equals(XYPoint p) const {
+bool Point2D::equals(Point2D p) const {
 	if((p.x==x) && (p.y==y))  {
 		return true;
 	}
 	return false;
 }
 
-bool XYPoint::issmaller(XYPoint p) const {
+bool Point2D::issmaller(Point2D p) const {
 	return tie( x, p.y ) < tie( p.x, y );
 }
 
-int XYPoint::dist(XYPoint a, unsigned int type) {
+int Point2D::dist(Point2D a, unsigned int type) {
 	switch(type) {
-		case XYPoint::MANHATTEN :
+		case Point2D::MANHATTEN :
 			return abs(x-a.getX()) + abs(y-a.getY());
-		case XYPoint::EUCLID :
+		case Point2D::EUCLID :
 		default:
 			return 0;
 	}
 }
 
-bool WeightedXYPoint::issmaller(WeightedXYPoint p) const {
+bool WeightedPoint2D::issmaller(WeightedPoint2D p) const {
 	if(w<p.w) {
 		return true;
 	}
@@ -52,40 +52,40 @@ bool WeightedXYPoint::issmaller(WeightedXYPoint p) const {
 
 /* =========================================    */
 
-WeightedXYPoint::WeightedXYPoint(XYPoint p, int ww)  {
+WeightedPoint2D::WeightedPoint2D(Point2D p, int ww)  {
 	x=p.getX();
 	y=p.getY();
 	w=ww;
 }
 
-WeightedXYPoint::WeightedXYPoint(int xx, int yy, int ww)  {
+WeightedPoint2D::WeightedPoint2D(int xx, int yy, int ww)  {
 	x=xx;
 	y=yy;
 	w=ww;
 }
 
-int WeightedXYPoint::getWeight() {
+int WeightedPoint2D::getWeight() {
 	return w;
 }
 
-WeightedXYPoint Grid::getWeightedPoint(XYPoint pp) {
+WeightedPoint2D Grid::getWeightedPoint(Point2D pp) {
 	for(auto p : points) {
 		if(p==pp) {
 			return p;
 		}
 	}
-	return WeightedXYPoint(pp,0);
+	return WeightedPoint2D(pp,0);
 }
 
 /* =========================================    */
 
 
 void Grid::setWeight(int x, int y, int w) {
-	points.push_back(WeightedXYPoint(x,y,w));
+	points.push_back(WeightedPoint2D(x,y,w));
 }
 
-void Grid::setWeight(XYPoint p, int w) {
-	points.push_back(WeightedXYPoint(p,w));
+void Grid::setWeight(Point2D p, int w) {
+	points.push_back(WeightedPoint2D(p,w));
 }
 
 
@@ -99,11 +99,11 @@ int Grid::getWeight(int x, int y) {
 	return 0;
 }
 
-int Grid::getWeight(XYPoint p) {
+int Grid::getWeight(Point2D p) {
 	return getWeight(p.getX(), p.getY());
 }
 
-int Grid::getCost(XYPoint a, XYPoint b) {
+int Grid::getCost(Point2D a, Point2D b) {
 	int d = getWeight(b)-getWeight(a);
 	if(d<=0) {
 		d = 0;
@@ -131,26 +131,26 @@ void Grid::plotw(Screen *scr) {
 }
 
 
-vector<XYPoint> XYPoint::neighbours(Grid g) {
-	vector<XYPoint> n;
+vector<Point2D> Point2D::neighbours(Grid g) {
+	vector<Point2D> n;
 
 	if(y-1>=0) {
-		n.push_back(XYPoint(x,y-1));
+		n.push_back(Point2D(x,y-1));
 	}
 	if(x-1>=0) {
-		n.push_back(XYPoint(x-1,y));
+		n.push_back(Point2D(x-1,y));
 	}
 	if(y+1<g.getHeight()) {
-		n.push_back(XYPoint(x,y+1));
+		n.push_back(Point2D(x,y+1));
 	}
 	if(x+1<g.getWidth()) {
-		n.push_back(XYPoint(x+1,y));
+		n.push_back(Point2D(x+1,y));
 	}
 
 	return n;
 }
 
-bool Grid::inside(XYPoint p) {
+bool Grid::inside(Point2D p) {
 	if(((p.getX()>0) && (p.getX()<width)) && ((p.getY()>0) && (p.getY()<height)) ) {
 		return true;
 	}

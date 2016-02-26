@@ -24,7 +24,7 @@ enum algo {
 void run_bfs_w_early_exit()  {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
-	auto path = bfs.bfs_with_early_exit(XYPoint(2,3), XYPoint(9,3));
+	auto path = bfs.bfs_with_early_exit(Point2D(2,3), Point2D(9,3));
 	cout << "GOAL!! ";
 	for(auto p : path)  {
 		cout << p << ' ';
@@ -32,7 +32,7 @@ void run_bfs_w_early_exit()  {
 	cout << endl;
 }
 
-vector<XYPoint> run_dijkstra() {
+vector<Point2D> run_dijkstra() {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
 
@@ -46,10 +46,10 @@ vector<XYPoint> run_dijkstra() {
 	grid.setWeight(6,2,1);
 	grid.setWeight(6,3,1);
 
-	return bfs.bfs_dijkstra(XYPoint(2,3), XYPoint(9,3));
+	return bfs.bfs_dijkstra(Point2D(2,3), Point2D(9,3));
 }
 
-vector<XYPoint> run_greedy() {
+vector<Point2D> run_greedy() {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
 
@@ -63,10 +63,10 @@ vector<XYPoint> run_greedy() {
 	grid.setWeight(6,2,3);
 	grid.setWeight(6,3,3);
 
-	return bfs.bfs_greedy(XYPoint(2,3), XYPoint(9,3));
+	return bfs.bfs_greedy(Point2D(2,3), Point2D(9,3));
 }
 
-vector<XYPoint> run_astar() {
+vector<Point2D> run_astar() {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
 
@@ -80,11 +80,11 @@ vector<XYPoint> run_astar() {
 	grid.setWeight(6,2,3);
 	grid.setWeight(6,3,3);
 
-	return bfs.bfs_astar(XYPoint(2,3), XYPoint(9,3));
+	return bfs.bfs_astar(Point2D(2,3), Point2D(9,3));
 }
 
 int main(int argc, char* argv[]) {
-	vector<XYPoint> path;
+	vector<Point2D> path;
 
 	cout << "\033[1;31mHello World\033[0m\n";
 

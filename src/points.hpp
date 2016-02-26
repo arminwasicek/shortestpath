@@ -18,20 +18,20 @@ using namespace std;
 
 class Grid;
 
-class XYPoint {
+class Point2D {
 protected:
 	int x;
 	int y;
 public:
-	XYPoint() { x=0; y=0; }
-	XYPoint(int x, int y);
+	Point2D() { x=0; y=0; }
+	Point2D(int x, int y);
 	bool equals(int x, int y) const;
-	bool equals(XYPoint p) const;
-	bool issmaller(XYPoint p) const;
-	int dist(XYPoint a, unsigned int type);
+	bool equals(Point2D p) const;
+	bool issmaller(Point2D p) const;
+	int dist(Point2D a, unsigned int type);
 	int getX() const {return x;};
 	int getY() const {return y;};
-	vector<XYPoint> neighbours(Grid g);
+	vector<Point2D> neighbours(Grid g);
 
 	enum disttype {
 		MANHATTEN = 0,
@@ -40,17 +40,17 @@ public:
 };
 
 
-class WeightedXYPoint : public XYPoint {
+class WeightedPoint2D : public Point2D {
 	int w;
 public:
-	WeightedXYPoint(XYPoint p, int w);
-	WeightedXYPoint(int x, int y, int w);
+	WeightedPoint2D(Point2D p, int w);
+	WeightedPoint2D(int x, int y, int w);
 	int getWeight();
-	bool issmaller(WeightedXYPoint p) const;
+	bool issmaller(WeightedPoint2D p) const;
 
 	struct compare
 	{
-	  bool operator()(const WeightedXYPoint& l, const WeightedXYPoint& r)
+	  bool operator()(const WeightedPoint2D& l, const WeightedPoint2D& r)
 	  {
 	      return !l.issmaller(r);
 	  }
@@ -59,41 +59,41 @@ public:
 
 
 class Grid {
-	vector<WeightedXYPoint> points;
+	vector<WeightedPoint2D> points;
 	int height;
 	int width;
 public:
 	Grid(int w,	int h) { height=h; width=w; }
-	bool inside(XYPoint p);
-	int getCost(XYPoint a, XYPoint b);
+	bool inside(Point2D p);
+	int getCost(Point2D a, Point2D b);
 	//void plot();
 	void plotw(Screen *scr);
-	WeightedXYPoint getWeightedPoint(XYPoint p);
+	WeightedPoint2D getWeightedPoint(Point2D p);
 	void setWeight(int x, int y, int w);
-	void setWeight(XYPoint p, int w);
+	void setWeight(Point2D p, int w);
 	int getWeight(int x, int y);
-	int getWeight(XYPoint p);
+	int getWeight(Point2D p);
 	int getHeight()  { return height; }
 	int getWidth()  { return width; }
 };
 
-inline bool operator<(const XYPoint& lhs, const XYPoint& rhs) {
+inline bool operator<(const Point2D& lhs, const Point2D& rhs) {
 	return lhs.issmaller(rhs);
 }
-inline bool operator==(const XYPoint& lhs, const XYPoint& rhs) {
+inline bool operator==(const Point2D& lhs, const Point2D& rhs) {
 	return lhs.equals(rhs);
 }
-inline bool operator!=(const XYPoint& lhs, const XYPoint& rhs){
+inline bool operator!=(const Point2D& lhs, const Point2D& rhs){
 	return !(lhs == rhs);
 }
-inline ostream& operator<<(ostream& out, const XYPoint& p) {
+inline ostream& operator<<(ostream& out, const Point2D& p) {
    return out << '(' << p.getX() << ',' << p.getY() << ')';
 }
 
-inline bool operator<(const WeightedXYPoint& lhs, const WeightedXYPoint& rhs) {
+inline bool operator<(const WeightedPoint2D& lhs, const WeightedPoint2D& rhs) {
 	return lhs.issmaller(rhs);
 }
-inline bool operator>(const WeightedXYPoint& lhs, const WeightedXYPoint& rhs) {
+inline bool operator>(const WeightedPoint2D& lhs, const WeightedPoint2D& rhs) {
 	return !lhs.issmaller(rhs);
 }
 
