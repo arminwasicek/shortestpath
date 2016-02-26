@@ -28,9 +28,15 @@ public:
 	bool equals(int x, int y) const;
 	bool equals(XYPoint p) const;
 	bool issmaller(XYPoint p) const;
+	int dist(XYPoint a, unsigned int type);
 	int getX() const {return x;};
 	int getY() const {return y;};
 	vector<XYPoint> neighbours(Grid g);
+
+	enum disttype {
+		MANHATTEN = 0,
+		EUCLID
+	};
 };
 
 

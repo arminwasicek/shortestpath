@@ -29,6 +29,16 @@ bool XYPoint::issmaller(XYPoint p) const {
 	return tie( x, p.y ) < tie( p.x, y );
 }
 
+int XYPoint::dist(XYPoint a, unsigned int type) {
+	switch(type) {
+		case XYPoint::MANHATTEN :
+			return abs(x-a.getX()) + abs(y-a.getY());
+		case XYPoint::EUCLID :
+		default:
+			return 0;
+	}
+}
+
 bool WeightedXYPoint::issmaller(WeightedXYPoint p) const {
 	if(w<p.w) {
 		return true;

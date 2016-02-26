@@ -59,20 +59,35 @@ vector<XYPoint> run_greedy() {
 	Grid grid(10,5);
 	ShortestPath bfs(&grid);
 
-	grid.setWeight(4,1,1);
-	grid.setWeight(4,2,1);
-	grid.setWeight(4,3,1);
-	grid.setWeight(5,1,2);
-	grid.setWeight(5,2,2);
-	grid.setWeight(5,3,2);
-	grid.setWeight(6,1,1);
-	grid.setWeight(6,2,1);
-	grid.setWeight(6,3,1);
+	grid.setWeight(4,1,3);
+	grid.setWeight(4,2,3);
+	grid.setWeight(4,3,3);
+	grid.setWeight(5,1,9);
+	grid.setWeight(5,2,9);
+	grid.setWeight(5,3,9);
+	grid.setWeight(6,1,3);
+	grid.setWeight(6,2,3);
+	grid.setWeight(6,3,3);
 
 	return bfs.bfs_greedy(XYPoint(2,3), XYPoint(9,3));
 }
 
+vector<XYPoint> run_astar() {
+	Grid grid(10,5);
+	ShortestPath bfs(&grid);
 
+	grid.setWeight(4,1,3);
+	grid.setWeight(4,2,3);
+	grid.setWeight(4,3,3);
+	grid.setWeight(5,1,9);
+	grid.setWeight(5,2,9);
+	grid.setWeight(5,3,9);
+	grid.setWeight(6,1,3);
+	grid.setWeight(6,2,3);
+	grid.setWeight(6,3,3);
+
+	return bfs.bfs_astar(XYPoint(2,3), XYPoint(9,3));
+}
 
 int main() {
 
@@ -82,7 +97,7 @@ int main() {
 //	run_bfs_w_early_exit();
 
 
-	auto path = run_greedy();
+	auto path = run_astar();
 
 	if(!path.empty()) {
 		cout << "GOAL!! ";

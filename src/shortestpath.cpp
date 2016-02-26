@@ -257,13 +257,56 @@ vector<XYPoint> ShortestPath::bfs_greedy(XYPoint start, XYPoint goal) {
 		auto curr = frontier_pq.top();
 		frontier_pq.pop();
 
+		if(curr==goal) {
+			cout << "found" << endl;
+			XYPoint p = curr;
+			res.push_back(p);
+			while(p!=camefrom[p]) {
+				p = camefrom[p];
+				res.push_back(p);
+			}
+			return res;
+		}
+
+		for(auto next : curr.neighbours(*grid)) {
+			if(!incamefrom(next))  {
+				int priority = next.dist(goal, XYPoint::MANHATTEN);
+				frontier_pq.push(WeightedXYPoint(next, priority));
+				visitfrom(next,curr);
+			}
+		}
+		grid->plotw(screen);
+		screen->set(start.getX(), start.getY(), 'X', Screen::COL_MNT_P, 0);
+		screen->set(goal.getX(), goal.getY(), 'O', Screen::COL_MNT_P, 0);
+		plot_pq(frontier_pq);
+		screen->update();
+		//getch();
+		usleep(100000);
+	}
+	return res;
+}
+
+
+
+
+
+vector<XYPoint> ShortestPath::bfs_astar(XYPoint start, XYPoint goal) {
+	vector<XYPoint> res;
+
+	frontier_pq.push(WeightedXYPoint(start,0));
+	visitfrom(start,start);
+	costsofar[start]=0;
+
+	while(!frontier_pq.empty()) {
+		auto curr = frontier_pq.top();
+		frontier_pq.pop();
+
 		for(auto next : curr.neighbours(*grid)) {
 			int newcost = costsofar[curr] + grid->getCost(curr, next);
 			if( !incostsofar(next) || (newcost<costsofar[next] ))  {
 				costsofar[(XYPoint) next]=newcost;
 				frontier_pq.push(WeightedXYPoint(next, newcost));
 				visitfrom(next,curr);
-
 				if(next==goal) {
 					cout << "found" << endl;
 					XYPoint p = next;
@@ -286,5 +329,4 @@ vector<XYPoint> ShortestPath::bfs_greedy(XYPoint start, XYPoint goal) {
 	}
 	return res;
 }
-
 
