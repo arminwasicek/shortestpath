@@ -8,7 +8,10 @@
 #ifndef GRID_HPP_
 #define GRID_HPP_
 
+#include <fstream>
+#include <iostream>
 #include <vector>
+#include <sstream>
 #include "points.hpp"
 
 class Point2D;
@@ -21,10 +24,11 @@ class Grid {
 	int height;
 	int width;
 public:
+	Grid() { height=0; width=0; };
 	Grid(int w,	int h) { height=h; width=w; }
 	bool inside(Point2D p);
 	int getCost(Point2D a, Point2D b);
-	//void plot();
+	int load(string file);
 	void plotw(Screen *scr);
 	WeightedPoint2D getWeightedPoint(Point2D p);
 	void setWeight(int x, int y, int w);

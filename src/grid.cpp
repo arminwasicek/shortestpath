@@ -66,3 +66,47 @@ bool Grid::inside(Point2D p) {
 	return false;
 }
 
+int Grid::load(string file) {
+	string line;
+	ifstream in(file);
+
+	// Check, if the file stream is ready
+	if (!in) {
+		// Print an error and exit
+		cerr << "File " << file << " could not be opened for reading." << endl;
+		return 1;
+	}
+
+	// Iterate line by line through the file
+	while(!in.eof())  {
+		in >> line;
+
+
+		// Catch height and width
+        if(line=="height") {
+        	string sub;
+        	in >> sub;
+	        height=stoi(sub);
+	    }
+		if(line=="width") {
+        	string sub;
+        	in >> sub;
+			width=stoi(sub);
+		}
+
+
+	    // Catch map
+		if(line=="map") {
+			while(getline(in, line)) {
+				for(int i=0; i<line.length(); i++) {
+					cout << line.at(i);
+				}
+			}
+		}
+
+		// Ignore the rest
+	}
+
+	return 0;
+}
+

@@ -85,6 +85,10 @@ vector<Point2D> run_astar() {
 
 int main(int argc, char* argv[]) {
 	vector<Point2D> path;
+	string f = "/Users/armin/Downloads/maze512-32-0.map";
+
+	Grid g(1,1);
+	g.load(f);
 
 	cout << "\033[1;31mHello World\033[0m\n";
 
