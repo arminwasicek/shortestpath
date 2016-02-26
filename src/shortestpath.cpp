@@ -157,6 +157,8 @@ vector<Point2D> ShortestPath::bfs_with_early_exit(Point2D start, Point2D goal) {
  * Dijkstra's algorithm uses breath first search and optimizes based on a cost
  * function between points. Thus, points with a lower cost are retrieved earlier
  * during execution from the priority queue.
+ *
+ * \note The method implements a delay after each processed point for visualization purposes.
  */
 vector<Point2D> ShortestPath::bfs_dijkstra(Point2D start, Point2D goal) {
 	vector<Point2D> res;
@@ -211,6 +213,8 @@ vector<Point2D> ShortestPath::bfs_dijkstra(Point2D start, Point2D goal) {
  * The Greedy algorithm optimizes based on the distance of the current point to
  * the goal. The next point processed is always the one with the shortest distance
  * to the goal.
+ *
+ * \note The method implements a delay after each processed point for visualization purposes.
  */
 vector<Point2D> ShortestPath::bfs_greedy(Point2D start, Point2D goal) {
 	vector<Point2D> res;
@@ -265,6 +269,8 @@ vector<Point2D> ShortestPath::bfs_greedy(Point2D start, Point2D goal) {
  * The A* algorithm combines the best from Dijkstra and Greedy algorithms. It adds new points
  * based on their current shortest path, but also their distance to the goal. This makes the
  * algorithm efficient and robust, even on maps with difficult features.
+ *
+ * \note The method implements a delay after each processed point for visualization purposes.
  */
 vector<Point2D> ShortestPath::bfs_astar(Point2D start, Point2D goal) {
 	vector<Point2D> res;
@@ -303,14 +309,14 @@ vector<Point2D> ShortestPath::bfs_astar(Point2D start, Point2D goal) {
 				visitfrom(next,curr);
 			}
 		}
-		// Some display comands.
+		// Some display commands.
 		grid->plotw(screen);
 		screen->set(start.getX(), start.getY(), 'X', Screen::COL_MNT_P, 0);
 		screen->set(goal.getX(), goal.getY(), 'O', Screen::COL_MNT_P, 0);
 		plot_pq(frontier_pq);
 		screen->update();
 		//getch();
-		//usleep(100000);
+		usleep(100000);
 	}
 	return res;
 }

@@ -8,7 +8,9 @@
 
 #include "screen.hpp"
 
-
+/*!
+ * \note The constructor checks, if a tty terminal is present.
+ */
 Screen::Screen(unsigned int h, unsigned int w)  {
 	if(isatty(fileno(stdout)))  {
 		cout << "is a tty :)" << endl;
@@ -42,6 +44,9 @@ Screen::~Screen()  {
 	}
 }
 
+/*! In case a single character without formatting is given, the character inherits
+ *  formatting from the current settings at the position.
+ */
 void Screen::set(int x, int y, char c, unsigned int col, unsigned int att) {
 	unsigned int ch = c | COLOR_PAIR(col) | att;
 	if((col==0) && (att==0)) {
@@ -50,7 +55,11 @@ void Screen::set(int x, int y, char c, unsigned int col, unsigned int att) {
 	buffer[x+y*width] = ch;
 }
 
-
+/*!
+ * \note Currently, the screen tries to distinguish between tty terminal and non-tty
+ * 		 output device. If there is a tty terminal, it uses ncurses, otherwise Screen
+ * 		 tried to do a raw screen dump.
+ */
 void Screen::update() {
 	if(tty) {
 		for(int i=0; i<width; i++)  {
