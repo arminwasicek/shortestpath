@@ -19,6 +19,8 @@ class WeightedPoint2D;
 
 using namespace std;
 
+#define MAXWEIGHT  1000
+
 class Grid {
 	vector<WeightedPoint2D> points;
 	int height;

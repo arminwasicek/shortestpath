@@ -79,19 +79,30 @@ WeightedPoint2D Grid::getWeightedPoint(Point2D pp) {
 
 vector<Point2D> Point2D::neighbours(Grid g) {
 	vector<Point2D> n;
+	int relx[] = {0, -1, 0, 1};
+	int rely[] = {-1, 0, 1, 0};
 
-	if(y-1>=0) {
-		n.push_back(Point2D(x,y-1));
+	for(int i=0; i<4; i++) {
+		Point2D p = Point2D(x+relx[i],y+rely[i]);
+		if(g.inside(p)) {
+			if(g.getWeight(p)<MAXWEIGHT) {
+				n.push_back(p);
+			}
+		}
 	}
-	if(x-1>=0) {
-		n.push_back(Point2D(x-1,y));
-	}
-	if(y+1<g.getHeight()) {
-		n.push_back(Point2D(x,y+1));
-	}
-	if(x+1<g.getWidth()) {
-		n.push_back(Point2D(x+1,y));
-	}
+
+//	if(y-1>=0) {
+//		n.push_back(Point2D(x,y-1));
+//	}
+//	if(x-1>=0) {
+//		n.push_back(Point2D(x-1,y));
+//	}
+//	if(y+1<g.getHeight()) {
+//		n.push_back(Point2D(x,y+1));
+//	}
+//	if(x+1<g.getWidth()) {
+//		n.push_back(Point2D(x+1,y));
+//	}
 
 	return n;
 }
