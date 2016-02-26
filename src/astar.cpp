@@ -14,6 +14,11 @@
 
 using namespace std;
 
+enum algo {
+	DIJKSTRA = 0,
+	GREEDY,
+	ASTAR
+};
 
 void run_dfs()  {
 	Grid grid(10,5);
@@ -89,17 +94,43 @@ vector<XYPoint> run_astar() {
 	return bfs.bfs_astar(XYPoint(2,3), XYPoint(9,3));
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+	vector<XYPoint> path;
 
-	cout << "Hello World" << endl;
-	cout << "\033[1;31mbold red text\033[0m\n";
+	cout << "\033[1;31mHello World\033[0m\n";
 
-//	run_bfs_w_early_exit();
+	unsigned int algo = ASTAR;
+
+	if(argc == 2) {
+		std::string arg = argv[1];
+		if((arg == "-d") || (arg == "--dijkstra")) {
+			algo = DIJKSTRA;
+		} else if((arg == "-g") || (arg == "--greedy")) {
+			algo = GREEDY;
+		} else if((arg == "-a") || (arg == "--astar")) {
+			algo = ASTAR;
+		}
+		else {
+			cout << "Algorithm " << arg << " not recognized. Falling back to default." << endl;
+		}
+	}
+
+	switch(algo) {
+		case GREEDY:
+			path = run_greedy();
+			break;
+		case DIJKSTRA:
+			path = run_dijkstra();
+			break;
+		case ASTAR:
+			path = run_astar();
+			break;
+
+	}
 
 
-	//auto path = run_astar();
-	//auto path = run_dijkstra();
-	auto path = run_greedy();
+	//TODO	run_bfs_w_early_exit();
+
 
 	if(!path.empty()) {
 		cout << "GOAL!! ";
