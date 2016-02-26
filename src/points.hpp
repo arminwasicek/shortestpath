@@ -93,7 +93,8 @@ public:
 	 */
 	int getY() const {return y;};
 
-
+	/*! \brief Enumeration for the different distance functions available.
+	 */
 	enum disttype {
 		/**  Manhatten distance: abs(x-x') + abs(y-y')*/
 		MANHATTEN = 0,
@@ -102,15 +103,43 @@ public:
 	};
 };
 
-
+/*! \brief The WeightedPoint2D class improves the Point2D class by adding a notion of
+ * 		   weight to points.
+ *
+ *  A weighted point in 2D space has an X and a Y coordinate, as well as a weight. The
+ *  weight can be used to refine the geometric primitive and can be interpreted for example
+ *  as elevation, terrain type, etc.
+ */
 class WeightedPoint2D : public Point2D {
 	int w;
 public:
+	/*! \brief Constructs a point in 2D space given a Point2D object.
+	 */
 	WeightedPoint2D(Point2D p, int w);
+
+	/*! \brief Constructs a point in 2D space given X and Y coordinates and a weight.
+	 */
 	WeightedPoint2D(int x, int y, int w);
+
+	/*! \brief Gets the point's weight.
+	 *
+	 * \return The point's weight
+	 */
 	int getWeight();
+
+	/*! \brief Tests, if the object is smaller than the point in the argument.
+	 *
+	 * @param[in]  p  The coordinates of the point to compare to
+	 * \return True, if smaller
+	 */
 	bool issmaller(WeightedPoint2D p) const;
 
+	/*! \brief Tests, if the lefthand side point object is bigger than the righthand side one.
+	 *
+	 * This operator is primarily used to establish the strict weak ordering required to order
+	 * the elements in a priority queue.
+	 *
+	 */
 	struct compare
 	{
 	  bool operator()(const WeightedPoint2D& l, const WeightedPoint2D& r)
