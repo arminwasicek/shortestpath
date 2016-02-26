@@ -85,10 +85,25 @@ vector<Point2D> run_astar() {
 
 int main(int argc, char* argv[]) {
 	vector<Point2D> path;
-	string f = "/Users/armin/Downloads/maze512-32-0.map";
+	//string f = "/Users/armin/Downloads/maze512-32-0.map";
+	string f = "/Users/armin/Downloads/mymaze2.map";
 
 	Grid g(1,1);
 	g.load(f);
+
+	ShortestPath sp(&g);
+
+	path = sp.bfs_astar(Point2D(2,3), Point2D(22,23));
+
+	if(!path.empty()) {
+		cout << "GOAL!! ";
+		for(auto p : path)  {
+			cout << p << ' ';
+		}
+		cout << endl;
+	}
+
+	return 1;
 
 	cout << "\033[1;31mHello World\033[0m\n";
 

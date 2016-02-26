@@ -97,10 +97,16 @@ int Grid::load(string file) {
 
 	    // Catch map
 		if(line=="map") {
+			getline(in, line);
+			int row=0;
 			while(getline(in, line)) {
-				for(int i=0; i<line.length(); i++) {
-					cout << line.at(i);
+				for(int col=0; col<line.length(); col++) {
+					if(line.at(col)=='@') {
+						cout << col << ',' << row << endl;
+						setWeight(col, row, 99999);
+					}
 				}
+				row++;
 			}
 		}
 
