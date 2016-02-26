@@ -25,10 +25,16 @@ bool Point2D::equals(Point2D p) const {
 	return false;
 }
 
+/*!
+ * \note Implements the strict weak ordering required for the map.
+ */
 bool Point2D::issmaller(Point2D p) const {
 	return tie( x, p.y ) < tie( p.x, y );
 }
 
+/*!
+ * \note Currently, only the Manhatten distance is implemented.
+ */
 int Point2D::dist(Point2D a, unsigned int type) {
 	switch(type) {
 		case Point2D::MANHATTEN :
@@ -68,6 +74,10 @@ int WeightedPoint2D::getWeight() {
 	return w;
 }
 
+/*!
+ * \note Searches linearly in the point vector.
+ * \todo Replace vector datastructure with tree-based method, e.g., kd-tree or grid file.
+ */
 WeightedPoint2D Grid::getWeightedPoint(Point2D pp) {
 	for(auto p : points) {
 		if(p==pp) {
@@ -77,6 +87,10 @@ WeightedPoint2D Grid::getWeightedPoint(Point2D pp) {
 	return WeightedPoint2D(pp,0);
 }
 
+/*!
+ * \note Returns North, West, South, East adjacent points as neighbours.
+ * \todo Parameterize method to facilitate for different neighbour computations.
+ */
 vector<Point2D> Point2D::neighbours(Grid g) {
 	vector<Point2D> n;
 	int relx[] = {0, -1, 0, 1};

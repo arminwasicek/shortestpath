@@ -31,6 +31,11 @@ int Grid::getWeight(Point2D p) {
 	return getWeight(p.getX(), p.getY());
 }
 
+/*!
+ * \note The cost is computed using a hardcoded Manhatten distance function.
+ * \note There is a from/to notion: If b's weight is smaller that the one of a,
+ * 		 then it is cut off at zero.
+ */
 int Grid::getCost(Point2D a, Point2D b) {
 	int d = getWeight(b)-getWeight(a);
 	if(d<=0) {

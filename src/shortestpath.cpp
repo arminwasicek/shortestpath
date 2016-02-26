@@ -73,8 +73,8 @@ void ShortestPath::print_map(map<Point2D, Point2D> v) {
 }
 
 
-void ShortestPath::print_pq(priorityqueue v) {
-	priorityqueue vv = v;
+void ShortestPath::print_pq(weightedpointpq v) {
+	weightedpointpq vv = v;
 	while(!vv.empty()) {
 		cout << vv.top() << ' ';
 		vv.pop();
@@ -82,8 +82,8 @@ void ShortestPath::print_pq(priorityqueue v) {
 	cout << endl;
 }
 
-void ShortestPath::plot_pq(priorityqueue v) {
-	priorityqueue vv = v;
+void ShortestPath::plot_pq(weightedpointpq v) {
+	weightedpointpq vv = v;
 	while(!vv.empty()) {
 		Point2D p = vv.top();
 		vv.pop();

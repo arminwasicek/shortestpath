@@ -15,7 +15,9 @@
 #include "points.hpp"
 #include "screen.hpp"
 
-typedef priority_queue<WeightedPoint2D,vector<WeightedPoint2D>, WeightedPoint2D::compare> priorityqueue;
+/*! \brief Type
+ */
+typedef priority_queue<WeightedPoint2D,vector<WeightedPoint2D>, WeightedPoint2D::compare> weightedpointpq;
 
 class ShortestPath {
 	vector<Point2D> frontier_vec;
@@ -23,7 +25,7 @@ class ShortestPath {
 	map<Point2D, Point2D> camefrom;
 	map<Point2D, int> costsofar;
 	//priority_queue<WeightedXYPoint> frontier_pq;
-	priorityqueue frontier_pq;
+	weightedpointpq frontier_pq;
 	Grid *grid = nullptr;
 	Screen *screen = nullptr;
 	void visit(Point2D p);
@@ -34,8 +36,8 @@ class ShortestPath {
 	bool infrontier(Point2D p);
 	void print_vec(vector<Point2D> v);
 	void print_map(map<Point2D, Point2D> v);
-	void print_pq(priorityqueue v);
-	void plot_pq(priorityqueue v);
+	void print_pq(weightedpointpq v);
+	void plot_pq(weightedpointpq v);
 	void cleanup();
 
 public:
