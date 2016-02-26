@@ -102,8 +102,7 @@ int Grid::load(string file) {
 			while(getline(in, line)) {
 				for(int col=0; col<line.length(); col++) {
 					if(line.at(col)=='@') {
-						cout << col << ',' << row << endl;
-						setWeight(col, row, 99999);
+						setWeight(col, row, 999999);
 					}
 				}
 				row++;

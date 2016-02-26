@@ -238,7 +238,7 @@ vector<Point2D> ShortestPath::bfs_astar(Point2D start, Point2D goal) {
 		frontier_pq.pop();
 
 		if(curr==goal) {
-			cout << "found" << endl;
+			//cout << "found" << endl;
 			Point2D p = curr;
 			res.push_back(p);
 			while(p!=camefrom[p]) {
@@ -263,7 +263,7 @@ vector<Point2D> ShortestPath::bfs_astar(Point2D start, Point2D goal) {
 		plot_pq(frontier_pq);
 		screen->update();
 		//getch();
-		usleep(100000);
+		//usleep(100000);
 	}
 	return res;
 }

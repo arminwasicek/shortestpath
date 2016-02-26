@@ -8,6 +8,8 @@
 
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
+
 #include "points.hpp"
 #include "shortestpath.hpp"
 #include "screen.hpp"
@@ -83,60 +85,59 @@ vector<Point2D> run_astar() {
 	return bfs.bfs_astar(Point2D(2,3), Point2D(9,3));
 }
 
+vector<Point2D> run_algo(int algo, string f) {
+	Grid grid(1,1);
+	grid.load(f);
+	int off = 3;
+	ShortestPath sp(&grid);
+	if(!f.empty()) {
+		switch(algo) {
+		case ASTAR:
+			return sp.bfs_astar(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
+		case DIJKSTRA:
+			return sp.bfs_dijkstra(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
+		case GREEDY:
+			return sp.bfs_greedy(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
+			break;
+		}
+	}
+	vector<Point2D> empty;
+	return empty;
+
+}
+
 int main(int argc, char* argv[]) {
 	vector<Point2D> path;
-	//string f = "/Users/armin/Downloads/maze512-32-0.map";
-	string f = "/Users/armin/Downloads/mymaze2.map";
-
-	Grid g(1,1);
-	g.load(f);
-
-	ShortestPath sp(&g);
-
-	path = sp.bfs_astar(Point2D(2,3), Point2D(22,23));
-
-	if(!path.empty()) {
-		cout << "GOAL!! ";
-		for(auto p : path)  {
-			cout << p << ' ';
-		}
-		cout << endl;
-	}
-
-	return 1;
+	unsigned int algo = ASTAR;
+	string f;
+	int c;
 
 	cout << "\033[1;31mHello World\033[0m\n";
 
-	unsigned int algo = ASTAR;
 
 	// Select an algorithm
-	if(argc == 2) {
-		std::string arg = argv[1];
-		if((arg == "-d") || (arg == "--dijkstra")) {
-			algo = DIJKSTRA;
-		} else if((arg == "-g") || (arg == "--greedy")) {
-			algo = GREEDY;
-		} else if((arg == "-a") || (arg == "--astar")) {
-			algo = ASTAR;
-		}
-		else {
-			cout << "Algorithm " << arg << " not recognized. Falling back to default." << endl;
-		}
+	while ((c = getopt (argc, argv, "adgf:")) != -1) {
+	    switch (c) {
+	      case 'a':
+	    	  algo = ASTAR; break;
+	      case 'd':
+	    	  algo = DIJKSTRA; break;
+	      case 'g':
+	    	  algo = GREEDY; break;
+	      case 'f':
+	    	  f = optarg;
+	      }
 	}
+
+	//string f = "/Users/armin/Downloads/maze512-32-0.map";
+	//string f = "/Users/armin/Downloads/mymaze3.map";
+
+
+
 
 	// Compute the shortest path with the selected algorithm.
-	switch(algo) {
-		case GREEDY:
-			path = run_greedy();
-			break;
-		case DIJKSTRA:
-			path = run_dijkstra();
-			break;
-		case ASTAR:
-			path = run_astar();
-			break;
+	path = run_algo(algo, f);
 
-	}
 	//TODO	run_bfs_w_early_exit();
 
 	// Print path point by point
