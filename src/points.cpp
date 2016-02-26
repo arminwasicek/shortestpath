@@ -90,20 +90,6 @@ vector<Point2D> Point2D::neighbours(Grid g) {
 			}
 		}
 	}
-
-//	if(y-1>=0) {
-//		n.push_back(Point2D(x,y-1));
-//	}
-//	if(x-1>=0) {
-//		n.push_back(Point2D(x-1,y));
-//	}
-//	if(y+1<g.getHeight()) {
-//		n.push_back(Point2D(x,y+1));
-//	}
-//	if(x+1<g.getWidth()) {
-//		n.push_back(Point2D(x+1,y));
-//	}
-
 	return n;
 }
 
