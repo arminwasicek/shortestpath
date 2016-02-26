@@ -71,13 +71,45 @@ public:
 	 */
 	~ShortestPath() { cleanup(); }
 
-	/*! \brief Type shorthand for a priority queue storing weighted points.
+	/*! \brief Implements a breadth first search that returns as soon as the goal has been
+	 * 		   reached.
+	 *
+	 * @param[in] start		The starting point of the path.
+	 * @param[in] goal		The ending point of the path.
+	 * \return Returns the shortest path as a list of points.
 	 */
 	vector<Point2D> bfs_with_early_exit(Point2D start, Point2D goal);
+
+	/*! \brief Implements a shortest path algorithm according to Dijkstra's algorithm.
+	 *
+	 * @param[in] start		The starting point of the path.
+	 * @param[in] goal		The ending point of the path.
+	 * \return Returns the shortest path as a list of points.
+	 */
 	vector<Point2D> bfs_dijkstra(Point2D start, Point2D goal);
+
+	/*! \brief Implements a shortest path algorithm according to the Greedy algorithm.
+	 *
+	 * @param[in] start		The starting point of the path.
+	 * @param[in] goal		The ending point of the path.
+	 * \return Returns the shortest path as a list of points.
+	 */
 	vector<Point2D> bfs_greedy(Point2D start, Point2D goal);
+
+	/*! \brief Implements a shortest path algorithm according to the A* algorithm.
+	 *
+	 * @param[in] start		The starting point of the path.
+	 * @param[in] goal		The ending point of the path.
+	 * \return Returns the shortest path as a list of points.
+	 */
 	vector<Point2D> bfs_astar(Point2D start, Point2D goal);
+
+	/*! \brief Outputs the current state of the frontier vector.
+	 */
 	void printfrontier() { print_vec(frontier_vec); };
+
+	/*! \brief Outputs the current state of the visited vector.
+	 */
 	void printvisited() { print_vec(visited); };
 };
 
