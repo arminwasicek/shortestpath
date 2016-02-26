@@ -97,7 +97,9 @@ int main() {
 //	run_bfs_w_early_exit();
 
 
-	auto path = run_astar();
+	//auto path = run_astar();
+	//auto path = run_dijkstra();
+	auto path = run_greedy();
 
 	if(!path.empty()) {
 		cout << "GOAL!! ";
