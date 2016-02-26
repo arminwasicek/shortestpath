@@ -66,6 +66,9 @@ bool Grid::inside(Point2D p) {
 	return false;
 }
 
+/*!
+ * If the file cannot be loaded the program exits with return value 1.
+ */
 int Grid::load(string file) {
 	string line;
 	ifstream in(file);
@@ -80,8 +83,6 @@ int Grid::load(string file) {
 	// Iterate line by line through the file
 	while(!in.eof())  {
 		in >> line;
-
-
 		// Catch height and width
         if(line=="height") {
         	string sub;
@@ -93,8 +94,6 @@ int Grid::load(string file) {
         	in >> sub;
 			width=stoi(sub);
 		}
-
-
 	    // Catch map
 		if(line=="map") {
 			getline(in, line);
@@ -108,10 +107,8 @@ int Grid::load(string file) {
 				row++;
 			}
 		}
-
 		// Ignore the rest
 	}
-
 	return 0;
 }
 

@@ -25,13 +25,16 @@ enum algo {
 
 
 
-/*!
+/*! \brief Runs the selected shortest path search algorithm.
+ *
  * Runs the selected shortest path search algorithm. If no algorithm is
  * selected, or the selection is not available, an empty path is returned.
  * If no map has been specified, an empty 10x10 grid is used per default.
  *
  * @param[in] algo	The algorithm selected.
  * @param[in] file	Filename to read a map.
+ *
+ * \return A vector containing the sequence of points between start and goal.
  */
 vector<Point2D> run_algo(int algo, string file) {
 	Grid grid(10,10);
@@ -59,12 +62,14 @@ vector<Point2D> run_algo(int algo, string file) {
  * The main function parses arguments and invokes the shortest path search.
  */
 int main(int argc, char* argv[]) {
-	vector<Point2D> path;				/**< Stores the path found */
-	unsigned int algo = ASTAR;			/**< Algorithm selection, defaults to A* */
-	string f;							/**< Map file name */
+	vector<Point2D> path;				/*!< Stores the path found */
+	unsigned int algo = ASTAR;			/*!< Algorithm selection, defaults to A* */
+	string f;							/*!< Map file name */
 	int c;
 
 	cout << "\033[1;31mHello World\033[0m\n";
+	cout << "Press button to continue..." << endl;
+	getchar();
 
 
 	// Select an algorithm
