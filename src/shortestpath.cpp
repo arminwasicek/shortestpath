@@ -92,64 +92,6 @@ void ShortestPath::plot_pq(priorityqueue v) {
 }
 
 
-
-void ShortestPath::dfs_full_traversal(XYPoint start) {
-	vector<XYPoint>::iterator it;
-	frontier_vec.push_back(start);
-	int c=0;
-
-	while(frontier_vec.size()>0) {
-		XYPoint p = frontier_vec.back();
-		frontier_vec.pop_back();
-
-		visit(p);
-
-		for(auto pp : p.neighbours(*grid)) {
-			if(!isvisited(pp) && !infrontier(pp)) {
-				frontier_vec.push_back(pp);
-				cout << pp << endl;
-				c++;
-				grid->setWeight(pp, c);
-			}
-		}
-		grid->plot();
-		cout << endl;
-		cout << frontier_vec.size() << " -> " << grid->getWeight(p) << " " << p << endl;
-		printfrontier();
-		printvisited();
-	}
-	cout << "Points visited " << c << endl;
-}
-
-void ShortestPath::bfs_full_traversal(XYPoint start) {
-	frontier_vec.push_back(start);
-	int c=0;
-
-	while(frontier_vec.size()>0) {
-		XYPoint p = frontier_vec.front();
-		frontier_vec.erase(frontier_vec.begin());
-
-		visit(p);
-
-		for(auto pp : p.neighbours(*grid)) {
-			if(!isvisited(pp) && !infrontier(pp)) {
-				frontier_vec.push_back(pp);
-				cout << pp << endl;
-				c++;
-				grid->setWeight(pp, c);
-			}
-		}
-		grid->plot();
-		cout << endl;
-		cout << frontier_vec.size() << " -> " << grid->getWeight(p) << " " << p << endl;
-		printfrontier();
-		printvisited();
-	}
-	cout << "Points visited " << c << endl;
-}
-
-
-
 vector<XYPoint> ShortestPath::bfs_with_early_exit(XYPoint start, XYPoint goal) {
 	if(!((grid->inside(start) && grid->inside(goal)))) {
 		//TODO throw exception
@@ -190,14 +132,7 @@ vector<XYPoint> ShortestPath::bfs_with_early_exit(XYPoint start, XYPoint goal) {
 				grid->setWeight(curr, c);
 			}
 		}
-		grid->plot();
-		cout << "frontier = "; printfrontier();
-		cout << "visited  = "; print_map(camefrom);
 	}
-	cout << "Points visited " << c << endl;
-	cout << "Points checked " << vc << endl;
-	cout << "Map size " << camefrom.size() << endl;
-
 	return vector<XYPoint>();
 }
 

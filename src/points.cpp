@@ -112,18 +112,6 @@ int Grid::getCost(XYPoint a, XYPoint b) {
 	return d;
 }
 
-void Grid::plot() {
-	for(int i=0; i<height; i++) {
-		for(int j=0; j<width; j++) {
-				int w = getWeight(j,i);
-				if(w<1)
-					cout << " . ";
-				else
-					cout << setfill(' ') << setw(3) << w;
-		}
-		cout << endl;
-	}
-}
 
 void Grid::plotw(Screen *scr) {
 	for(int i=0; i<width; i++) {

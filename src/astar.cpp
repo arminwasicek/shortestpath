@@ -20,17 +20,6 @@ enum algo {
 	ASTAR
 };
 
-void run_dfs()  {
-	Grid grid(10,5);
-	ShortestPath dfs(&grid);
-	dfs.dfs_full_traversal(XYPoint(2,3));
-}
-
-void run_bfs()  {
-	Grid grid(10,5);
-	ShortestPath bfs(&grid);
-	bfs.bfs_full_traversal(XYPoint(2,3));
-}
 
 void run_bfs_w_early_exit()  {
 	Grid grid(10,5);
