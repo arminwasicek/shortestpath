@@ -101,6 +101,7 @@ int main(int argc, char* argv[]) {
 
 	unsigned int algo = ASTAR;
 
+	// Select an algorithm
 	if(argc == 2) {
 		std::string arg = argv[1];
 		if((arg == "-d") || (arg == "--dijkstra")) {
@@ -115,6 +116,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
+	// Compute the shortest path with the selected algorithm.
 	switch(algo) {
 		case GREEDY:
 			path = run_greedy();
@@ -127,11 +129,9 @@ int main(int argc, char* argv[]) {
 			break;
 
 	}
-
-
 	//TODO	run_bfs_w_early_exit();
 
-
+	// Print path point by point
 	if(!path.empty()) {
 		cout << "GOAL!! ";
 		for(auto p : path)  {
@@ -139,15 +139,6 @@ int main(int argc, char* argv[]) {
 		}
 		cout << endl;
 	}
-
-//	Screen scr;
-//
-//	for(int i=0; i<10; i++) {
-//		XYPoint p(i,0);
-//		scr.set(p.getX(), p.getY(), 'X', Screen::COL_MNT, A_UNDERLINE);
-//	}
-//	getch();
-
 
 	return 0;
 }
