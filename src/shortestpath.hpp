@@ -34,7 +34,10 @@ typedef priority_queue<WeightedPoint2D,vector<WeightedPoint2D>, WeightedPoint2D:
  * 	\note The descriptions in [here](http://www.redblobgames.com/pathfinding/a-star/introduction.html)
  * 		  were very helpful to implement the search algorithms.
  */
-class ShortestPath {
+class ShortestPathDS {
+
+protected:
+
 	vector<Point2D> frontier_vec;
 	vector<Point2D> visited;
 	map<Point2D, Point2D> camefrom;
@@ -65,44 +68,11 @@ public:
 	 *
 	 * @param[in] g	 The grid on which the algorithms are operating on.
 	 */
-	ShortestPath(Grid *g) { grid=g; screen = new Screen(grid->getHeight(), grid->getWidth()); }
+	ShortestPathDS(Grid *g) { grid=g; screen = new Screen(grid->getHeight(), grid->getWidth()); }
 
 	/*! \brief Releases resources and empties the temporary data in the containers.
 	 */
-	~ShortestPath() { cleanup(); }
-
-	/*! \brief Implements a breadth first search that returns as soon as the goal has been
-	 * 		   reached.
-	 *
-	 * @param[in] start		The starting point of the path.
-	 * @param[in] goal		The ending point of the path.
-	 * \return Returns the shortest path as a list of points.
-	 */
-	vector<Point2D> bfs_with_early_exit(Point2D start, Point2D goal);
-
-	/*! \brief Implements a shortest path algorithm according to Dijkstra's algorithm.
-	 *
-	 * @param[in] start		The starting point of the path.
-	 * @param[in] goal		The ending point of the path.
-	 * \return Returns the shortest path as a list of points.
-	 */
-	vector<Point2D> bfs_dijkstra(Point2D start, Point2D goal);
-
-	/*! \brief Implements a shortest path algorithm according to the Greedy algorithm.
-	 *
-	 * @param[in] start		The starting point of the path.
-	 * @param[in] goal		The ending point of the path.
-	 * \return Returns the shortest path as a list of points.
-	 */
-	vector<Point2D> bfs_greedy(Point2D start, Point2D goal);
-
-	/*! \brief Implements a shortest path algorithm according to the A* algorithm.
-	 *
-	 * @param[in] start		The starting point of the path.
-	 * @param[in] goal		The ending point of the path.
-	 * \return Returns the shortest path as a list of points.
-	 */
-	vector<Point2D> bfs_astar(Point2D start, Point2D goal);
+	~ShortestPathDS() { cleanup(); }
 
 	/*! \brief Outputs the current state of the frontier vector.
 	 */
@@ -113,5 +83,54 @@ public:
 	void printvisited() { print_vec(visited); };
 };
 
+
+class ShortestPathBFS : public ShortestPathDS {
+public:
+	using ShortestPathDS::ShortestPathDS;
+	/*! \brief Implements a breadth first search that returns as soon as the goal has been
+	 * 		   reached.
+	 *
+	 * @param[in] start		The starting point of the path.
+	 * @param[in] goal		The ending point of the path.
+	 * \return Returns the shortest path as a list of points.
+	 */
+	vector<Point2D> bfs_with_early_exit(Point2D start, Point2D goal);
+};
+
+class ShortestPathDijkstra : public ShortestPathDS {
+public:
+	using ShortestPathDS::ShortestPathDS;
+	/*! \brief Implements a shortest path algorithm according to Dijkstra's algorithm.
+	 *
+	 * @param[in] start		The starting point of the path.
+	 * @param[in] goal		The ending point of the path.
+	 * \return Returns the shortest path as a list of points.
+	 */
+	vector<Point2D> bfs_dijkstra(Point2D start, Point2D goal);
+};
+
+class ShortestPathGreedy : public ShortestPathDS {
+public:
+	using ShortestPathDS::ShortestPathDS;
+	/*! \brief Implements a shortest path algorithm according to the Greedy algorithm.
+	 *
+	 * @param[in] start		The starting point of the path.
+	 * @param[in] goal		The ending point of the path.
+	 * \return Returns the shortest path as a list of points.
+	 */
+	vector<Point2D> bfs_greedy(Point2D start, Point2D goal);
+};
+
+class ShortestPathAstar : public ShortestPathDS {
+public:
+	using ShortestPathDS::ShortestPathDS;
+	/*! \brief Implements a shortest path algorithm according to the A* algorithm.
+	 *
+	 * @param[in] start		The starting point of the path.
+	 * @param[in] goal		The ending point of the path.
+	 * \return Returns the shortest path as a list of points.
+	 */
+	vector<Point2D> bfs_astar(Point2D start, Point2D goal);
+};
 
 #endif /* SHORTESTPATH_HPP_ */

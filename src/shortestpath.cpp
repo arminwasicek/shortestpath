@@ -9,61 +9,61 @@
 
 using namespace std;
 
-void ShortestPath::cleanup() {
+void ShortestPathDS::cleanup() {
 	frontier_vec.clear();
 	visited.clear();
 	camefrom.clear();
 	delete screen;
 }
 
-inline bool ShortestPath::isvisited(Point2D p) {
+inline bool ShortestPathDS::isvisited(Point2D p) {
 	if (find(visited.begin(), visited.end(), p) != visited.end() ) {
 		return true;
 	}
 	return false;
 }
 
-inline bool ShortestPath::infrontier(Point2D p) {
+inline bool ShortestPathDS::infrontier(Point2D p) {
 	if (find(frontier_vec.begin(), frontier_vec.end(), p) != frontier_vec.end() ) {
 		return true;
 	}
 	return false;
 }
 
-inline void ShortestPath::visit(Point2D p) {
+inline void ShortestPathDS::visit(Point2D p) {
 	if ( !isvisited(p) ) {
 		visited.push_back(p);
 	}
 }
 
-inline bool ShortestPath::incamefrom(Point2D p) {
+inline bool ShortestPathDS::incamefrom(Point2D p) {
 	if ( camefrom.find(p) != camefrom.end() ) {
 	  return true;
 	}
 	return false;
 }
 
-inline bool ShortestPath::incostsofar(Point2D p) {
+inline bool ShortestPathDS::incostsofar(Point2D p) {
 	if ( costsofar.find(p) != costsofar.end() ) {
 	  return true;
 	}
 	return false;
 }
 
-inline void ShortestPath::visitfrom(Point2D curr, Point2D from) {
+inline void ShortestPathDS::visitfrom(Point2D curr, Point2D from) {
 	if ( !incamefrom(curr) ) {
 		camefrom.insert({curr, from});
 	}
 }
 
-void ShortestPath::print_vec(vector<Point2D> v) {
+void ShortestPathDS::print_vec(vector<Point2D> v) {
 	for(auto p : v) {
 		cout << grid->getWeight(p) << ' ';
 	}
 	cout << endl;
 }
 
-void ShortestPath::print_map(map<Point2D, Point2D> v) {
+void ShortestPathDS::print_map(map<Point2D, Point2D> v) {
 	for(auto it : v) {
 		Point2D p = it.first;
 		//cout << grid->getWeight(p)  << " ";
@@ -77,7 +77,7 @@ void ShortestPath::print_map(map<Point2D, Point2D> v) {
  * 	      and printed element by element. This might not be the most efficient way to
  * 	      to this.
  */
-void ShortestPath::print_pq(weightedpointpq v) {
+void ShortestPathDS::print_pq(weightedpointpq v) {
 	weightedpointpq vv = v;
 	while(!vv.empty()) {
 		cout << vv.top() << ' ';
@@ -91,7 +91,7 @@ void ShortestPath::print_pq(weightedpointpq v) {
  * 	      and printed element by element. This might not be the most efficient way to
  * 	      to this.
  */
-void ShortestPath::plot_pq(weightedpointpq v) {
+void ShortestPathDS::plot_pq(weightedpointpq v) {
 	weightedpointpq vv = v;
 	while(!vv.empty()) {
 		Point2D p = vv.top();
@@ -104,7 +104,7 @@ void ShortestPath::plot_pq(weightedpointpq v) {
  * Breath first search treats all the points the same. They are enqueued and
  * processed on a first come first serve basis.
  */
-vector<Point2D> ShortestPath::bfs_with_early_exit(Point2D start, Point2D goal) {
+vector<Point2D> ShortestPathBFS::bfs_with_early_exit(Point2D start, Point2D goal) {
 	if(!((grid->inside(start) && grid->inside(goal)))) {
 		//TODO throw exception
 		return vector<Point2D>();
@@ -160,7 +160,7 @@ vector<Point2D> ShortestPath::bfs_with_early_exit(Point2D start, Point2D goal) {
  *
  * \note The method implements a delay after each processed point for visualization purposes.
  */
-vector<Point2D> ShortestPath::bfs_dijkstra(Point2D start, Point2D goal) {
+vector<Point2D> ShortestPathDijkstra::bfs_dijkstra(Point2D start, Point2D goal) {
 	vector<Point2D> res;
 
 	// Add the first point to the priority queue serving as the frontier
@@ -216,7 +216,7 @@ vector<Point2D> ShortestPath::bfs_dijkstra(Point2D start, Point2D goal) {
  *
  * \note The method implements a delay after each processed point for visualization purposes.
  */
-vector<Point2D> ShortestPath::bfs_greedy(Point2D start, Point2D goal) {
+vector<Point2D> ShortestPathGreedy::bfs_greedy(Point2D start, Point2D goal) {
 	vector<Point2D> res;
 
 	// Add the first point to the priority queue serving as the frontier
@@ -272,7 +272,7 @@ vector<Point2D> ShortestPath::bfs_greedy(Point2D start, Point2D goal) {
  *
  * \note The method implements a delay after each processed point for visualization purposes.
  */
-vector<Point2D> ShortestPath::bfs_astar(Point2D start, Point2D goal) {
+vector<Point2D> ShortestPathAstar::bfs_astar(Point2D start, Point2D goal) {
 	vector<Point2D> res;
 
 	// Add the first point to the priority queue serving as the frontier

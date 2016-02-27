@@ -42,16 +42,20 @@ vector<Point2D> run_algo(int algo, string file) {
 		grid.load(file);
 	}
 	int off = 3;
-	ShortestPath sp(&grid);
 
 	switch(algo) {
-		case ASTAR:
-			return sp.bfs_astar(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
-		case DIJKSTRA:
-			return sp.bfs_dijkstra(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
-		case GREEDY:
-			return sp.bfs_greedy(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
-			break;
+		case ASTAR: {
+			ShortestPathAstar spa(&grid);
+			return spa.bfs_astar(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
+		}
+		case DIJKSTRA: {
+			ShortestPathDijkstra spd(&grid);
+			return spd.bfs_dijkstra(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
+		}
+		case GREEDY: {
+			ShortestPathGreedy spg(&grid);
+			return spg.bfs_greedy(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
+		}
 	}
 
 	vector<Point2D> empty;
