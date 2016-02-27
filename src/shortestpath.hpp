@@ -52,10 +52,21 @@ protected:
 public:
 	ShortestPath(Grid *g) { grid=g; screen = new Screen(grid->getHeight(), grid->getWidth()); cout << "Constructor " << g << endl;}
 	virtual ~ShortestPath() { cleanup(); cout << "deleting ShortestPath" << endl;}
+	/*! \brief Implements a shortest path search algorithm based on breadth first search.
+	 *
+	 * Concrete implementations have to subclass ShortestPath.
+	 *
+	 * @param[in] start		The starting point of the path.
+	 * @param[in] goal		The ending point of the path.
+	 * \return Returns the shortest path as a list of points.
+	 */
 	virtual vector<Point2D> runbfs(Point2D start, Point2D goal) {cout << "ShortestPath runbfs" << endl; vector<Point2D> res; return res;};
 };
 
 
+/*! \brief Implements a breadth first search that returns as soon as the goal has been
+ * 		   reached.
+ */
 class ShortestPathBFS : public ShortestPath {
 public:
 	using ShortestPath::ShortestPath;
@@ -63,6 +74,8 @@ public:
 	vector<Point2D> runbfs(Point2D start, Point2D goal);
 };
 
+/*! \brief Implements a shortest path algorithm according to Dijkstra's algorithm.
+ */
 class ShortestPathDijkstra : public ShortestPath {
 public:
 	using ShortestPath::ShortestPath;
@@ -70,6 +83,8 @@ public:
 	vector<Point2D> runbfs(Point2D start, Point2D goal);
 };
 
+/*! \brief Implements a shortest path algorithm according to the Greedy algorithm.
+ */
 class ShortestPathGreedy : public ShortestPath {
 public:
 	using ShortestPath::ShortestPath;
@@ -77,6 +92,8 @@ public:
 	vector<Point2D> runbfs(Point2D start, Point2D goal);
 };
 
+/*! \brief Implements a shortest path algorithm according to the A* algorithm.
+ */
 class ShortestPathAstar : public ShortestPath {
 public:
 	using ShortestPath::ShortestPath;
