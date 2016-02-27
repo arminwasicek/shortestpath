@@ -44,8 +44,8 @@ vector<Point2D> run_algo(int algo, string file) {
 	int off = 3;
 
 	ShortestPath *sp;
-	sp = new ShortestPathAstar(&grid);
-/*
+
+
 	switch(algo) {
 		case ASTAR:
 			sp = new ShortestPathAstar(&grid);
@@ -60,7 +60,6 @@ vector<Point2D> run_algo(int algo, string file) {
 			vector<Point2D> empty;
 			return empty;
 	}
-*/
 	vector<Point2D> res = sp->runbfs(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
 	delete sp;
 	return res;
