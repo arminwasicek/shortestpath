@@ -65,8 +65,8 @@ protected:
 	void printvisited() { print_vec(visited); };
 
 public:
-	ShortestPath(Grid *g) { grid=g; screen = new Screen(grid->getHeight(), grid->getWidth()); cout << "Constructor " << g << endl;}
-	virtual ~ShortestPath() { cleanup(); cout << "deleting ShortestPath" << endl;}
+	ShortestPath(Grid *g) { grid=g; screen = new Screen(grid->getHeight(), grid->getWidth()); }
+	virtual ~ShortestPath() { cleanup(); }
 	/*! \brief Implements a shortest path search algorithm based on breadth first search.
 	 *
 	 * Concrete implementations have to subclass ShortestPath.
