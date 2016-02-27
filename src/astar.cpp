@@ -43,23 +43,29 @@ vector<Point2D> run_algo(int algo, string file) {
 	}
 	int off = 3;
 
+	ShortestPath *sp;
+	sp = new ShortestPathAstar(&grid);
+/*
 	switch(algo) {
-		case ASTAR: {
-			ShortestPathAstar spa(&grid);
-			return spa.bfs_astar(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
-		}
-		case DIJKSTRA: {
-			ShortestPathDijkstra spd(&grid);
-			return spd.bfs_dijkstra(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
-		}
-		case GREEDY: {
-			ShortestPathGreedy spg(&grid);
-			return spg.bfs_greedy(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
-		}
+		case ASTAR:
+			sp = new ShortestPathAstar(&grid);
+			break;
+		case DIJKSTRA:
+			sp = new ShortestPathDijkstra(&grid);
+			break;
+		case GREEDY:
+			sp = new ShortestPathGreedy(&grid);
+			break;
+		default:
+			vector<Point2D> empty;
+			return empty;
 	}
+*/
+	vector<Point2D> res = sp->runbfs(Point2D(2,3), Point2D(grid.getWidth()-off,grid.getHeight()-off));
+	delete sp;
+	return res;
 
-	vector<Point2D> empty;
-	return empty;
+
 }
 
 /*!
@@ -73,7 +79,7 @@ int main(int argc, char* argv[]) {
 
 	cout << "\033[1;31mHello World\033[0m\n";
 	cout << "Press button to continue..." << endl;
-	getchar();
+	//getchar();
 
 
 	// Select an algorithm
